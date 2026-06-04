@@ -1,0 +1,97 @@
+---
+aid: indian-institute-of-technology-kharagpur
+name: Indian Institute of Technology Kharagpur
+description: >-
+  Indian Institute of Technology Kharagpur (IIT Kharagpur / IIT KGP) is a public
+  technical and research university in West Bengal, India, and the first of the
+  IITs, ranked #222 in the QS World University Rankings 2025. Its public digital
+  footprint centers on machine-readable scholarly infrastructure rather than a
+  formal developer program: the Central Library operates a DSpace-based
+  Institutional Digital Repository (the first IR among the IITs) and the
+  institute maintains an IRINS research-profile portal hosted by INFLIBNET that
+  ingests data from ORCID, Scopus, and Crossref. Operational systems such as the
+  ERP/SSO platform are gated to enrolled members and expose no public API
+  documentation. No official institution-wide developer portal was found; this
+  profile catalogs the publicly reachable, standards-based endpoints only.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/indian-institute-of-technology-kharagpur/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research
+  - Library
+  - Institutional Repository
+  - DSpace
+  - India
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: indian-institute-of-technology-kharagpur:idr
+    name: Institutional Digital Repository (DSpace)
+    description: >-
+      The IIT Kharagpur Central Library Institutional Digital Repository is a
+      DSpace-based open repository that collects and preserves the scholarly
+      output of the IIT Kharagpur community. It is reachable via the public
+      DSpace XMLUI web interface; DSpace platforms conventionally expose
+      OAI-PMH metadata harvesting and item/bitstream access, though no
+      institute-specific API documentation is published.
+    humanURL: http://www.idr.iitkgp.ac.in/xmlui/
+    baseURL: http://www.idr.iitkgp.ac.in/xmlui/
+    tags: [ Library, Institutional Repository, DSpace, OAI-PMH, Research, Metadata ]
+    properties:
+      - type: Documentation
+        url: http://www.idr.iitkgp.ac.in/xmlui/
+  - aid: indian-institute-of-technology-kharagpur:irins
+    name: IRINS Research Information Portal
+    description: >-
+      IIT Kharagpur's Indian Research Information Network System (IRINS) portal,
+      hosted by INFLIBNET, is a web-based research-information management service
+      that showcases faculty and researcher profiles and scholarly output. IRINS
+      ingests publication and identity data through ORCID, Scopus, and Crossref
+      API workflows; the institute instance is publicly browsable but does not
+      publish its own developer API documentation.
+    humanURL: https://iitkgp.irins.org/
+    baseURL: https://iitkgp.irins.org/
+    tags: [ Research, Research Profiles, IRINS, INFLIBNET, ORCID, Scopus ]
+    properties:
+      - type: Documentation
+        url: https://iitkgp.irins.org/
+  - aid: indian-institute-of-technology-kharagpur:erp-sso
+    name: ERP / Single Sign-On (Gated)
+    description: >-
+      The official IIT Kharagpur ERP system provides a Single Sign-On
+      authentication server used by enrolled students and staff. The login and
+      SSO endpoints are live but gated behind credentials, secret-question, and
+      OTP verification, and there is no public API documentation. Listed for
+      completeness; community-built (unofficial) login helper packages exist but
+      are not endorsed by the institute.
+    humanURL: https://erp.iitkgp.ac.in/
+    tags: [ ERP, SSO, Authentication, Gated, Identity ]
+    properties:
+      - type: Documentation
+        url: https://erp.iitkgp.ac.in/
+common:
+  - type: Website
+    url: https://www.iitkgp.ac.in/
+  - type: GitHub
+    url: https://github.com/IIT-KGP
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/indian-institute-of-technology-kharagpur/
+  - type: Library
+    url: https://library.iitkgp.ac.in/
+  - type: Plans
+    url: plans/indian-institute-of-technology-kharagpur-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/indian-institute-of-technology-kharagpur-rate-limits.yml
+  - type: FinOps
+    url: finops/indian-institute-of-technology-kharagpur-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

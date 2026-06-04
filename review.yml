@@ -1,0 +1,50 @@
+---
+name: Indian Institute of Technology Kharagpur
+description: Indian Institute of Technology Kharagpur public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/indian-institute-of-technology-kharagpur/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 2
+    summary: >-
+      IIT Kharagpur has no official institution-wide developer portal or
+      documented public API. Verified live: the official website, the
+      DSpace-based Institutional Digital Repository (XMLUI), the IRINS research
+      profile portal, the Central Library site, the ERP/SSO server, and the
+      official IIT-KGP GitHub org. The DSpace IR and IRINS are standards-based
+      and publicly browsable but ship no institute-authored API docs; the OAI
+      verb path I probed returned 404 (the XMLUI front end is up, but the OAI
+      endpoint location was not confirmed). The ERP/SSO is gated (auth.htm
+      returns 405 to GET, expecting POST). No fabricated endpoints; only
+      confirmed, reachable URLs are recorded. Community orgs (metakgp,
+      devsoc-iitkgp) exist but are unofficial and excluded from the official
+      catalog.
+    endpoints:
+      - url: https://www.iitkgp.ac.in/
+        status: 200
+        note: Official institution website (browser UA; curl default returned 000).
+      - url: http://www.idr.iitkgp.ac.in/xmlui/
+        status: 200
+        note: DSpace Institutional Digital Repository, public XMLUI front end.
+      - url: http://www.idr.iitkgp.ac.in/xmlui/OAI/request?verb=Identify
+        status: 404
+        note: Conventional DSpace OAI path not found at this location; OAI endpoint unconfirmed.
+      - url: https://iitkgp.irins.org/
+        status: 200
+        note: IRINS research information portal (INFLIBNET-hosted), publicly browsable.
+      - url: https://erp.iitkgp.ac.in/
+        status: 200
+        note: Official ERP system homepage; gated, no public API docs.
+      - url: https://erp.iitkgp.ac.in/SSOAdministration/auth.htm
+        status: 405
+        note: SSO auth endpoint expects POST (method not allowed on GET); gated.
+      - url: https://library.iitkgp.ac.in/
+        status: 200
+        note: Central Library website.
+      - url: https://github.com/IIT-KGP
+        status: 200
+        note: Official IIT-KGP GitHub org (2 public repos, low activity).
+      - url: https://heimdall.metakgp.org/
+        status: 200
+        note: Community (metakgp) auth service; unofficial, not an institute API.
