@@ -1,0 +1,116 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "iitkgp": "https://www.iitkgp.ac.in/#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "institution": {
+      "@id": "schema:CollegeOrUniversity",
+      "@type": "@id"
+    },
+    "name": "schema:name",
+    "alternateName": "schema:alternateName",
+    "description": "schema:description",
+    "url": "schema:url",
+    "logo": {
+      "@id": "schema:logo",
+      "@type": "@id"
+    },
+    "sameAs": {
+      "@id": "schema:sameAs",
+      "@type": "@id"
+    },
+    "foundingDate": {
+      "@id": "schema:foundingDate",
+      "@type": "xsd:date"
+    },
+    "address": "schema:address",
+    "department": {
+      "@id": "schema:department",
+      "@type": "@id"
+    },
+
+    "repository": {
+      "@id": "iitkgp:repository",
+      "@type": "@id"
+    },
+    "item": {
+      "@id": "iitkgp:item",
+      "@type": "@id"
+    },
+    "title": "schema:name",
+    "creator": {
+      "@id": "schema:creator",
+      "@type": "@id"
+    },
+    "author": {
+      "@id": "schema:author",
+      "@type": "@id"
+    },
+    "datePublished": {
+      "@id": "schema:datePublished",
+      "@type": "xsd:date"
+    },
+    "abstract": "schema:abstract",
+    "subject": "schema:about",
+    "identifier": "schema:identifier",
+    "handle": {
+      "@id": "iitkgp:handle",
+      "@type": "@id"
+    },
+    "bitstream": {
+      "@id": "iitkgp:bitstream",
+      "@type": "@id"
+    },
+    "publisher": {
+      "@id": "schema:publisher",
+      "@type": "@id"
+    },
+    "license": {
+      "@id": "schema:license",
+      "@type": "@id"
+    },
+
+    "researcher": {
+      "@id": "iitkgp:researcher",
+      "@type": "@id"
+    },
+    "orcid": {
+      "@id": "iitkgp:orcid",
+      "@type": "@id"
+    },
+    "scopusId": "iitkgp:scopusId",
+    "affiliation": {
+      "@id": "schema:affiliation",
+      "@type": "@id"
+    },
+    "publication": {
+      "@id": "iitkgp:publication",
+      "@type": "@id"
+    }
+  },
+  "@type": "CollegeOrUniversity",
+  "@id": "https://www.iitkgp.ac.in/",
+  "name": "Indian Institute of Technology Kharagpur",
+  "alternateName": ["IIT Kharagpur", "IIT KGP"],
+  "url": "https://www.iitkgp.ac.in/",
+  "foundingDate": "1951",
+  "description": "Public technical and research university in West Bengal, India; the first of the Indian Institutes of Technology.",
+  "sameAs": [
+    "https://github.com/IIT-KGP",
+    "https://www.linkedin.com/school/indian-institute-of-technology-kharagpur/",
+    "https://en.wikipedia.org/wiki/IIT_Kharagpur"
+  ],
+  "department": [
+    {
+      "@type": "Library",
+      "name": "Central Library - Institutional Digital Repository (DSpace)",
+      "url": "http://www.idr.iitkgp.ac.in/xmlui/"
+    },
+    {
+      "@type": "Organization",
+      "name": "IRINS Research Information Portal",
+      "url": "https://iitkgp.irins.org/"
+    }
+  ]
+}
