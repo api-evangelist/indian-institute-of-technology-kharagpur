@@ -76,6 +76,8 @@ apis:
       - type: Documentation
         url: https://erp.iitkgp.ac.in/
 common:
+  - type: DomainSecurity
+    url: security/indian-institute-of-technology-kharagpur-domain-security.yml
   - type: Website
     url: https://www.iitkgp.ac.in/
   - type: GitHub

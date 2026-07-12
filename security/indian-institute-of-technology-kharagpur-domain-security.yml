@@ -1,0 +1,31 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.iitkgp.ac.in
+  https: false
+- host: www.idr.iitkgp.ac.in
+  https: false
+- host: iitkgp.irins.org
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 18 11:22:23 2026 GMT
+  hsts: false
+domains:
+- domain: iitkgp.ac.in
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: true
+  dmarc_policy: reject
+- domain: irins.org
+  dnssec: false
+  caa:
+  - 0 issuewild "ssl.com"
+  - 0 issuewild "starfieldtech.com"
+  - 0 issue "comodoca.com"
+  - 0 issue "digicert.com; cansignhttpexchanges=yes"
+  - 0 issue "godaddy.com"
+  - 0 issue "letsencrypt.org"
+  spf: true
+  dmarc: false
