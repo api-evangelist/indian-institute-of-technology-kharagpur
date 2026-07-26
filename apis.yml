@@ -1,4 +1,3 @@
----
 aid: indian-institute-of-technology-kharagpur
 name: Indian Institute of Technology Kharagpur
 description: >-
@@ -14,9 +13,21 @@ description: >-
   documentation. No official institution-wide developer portal was found; this
   profile catalogs the publicly reachable, standards-based endpoints only.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+    - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/indian-institute-of-technology-kharagpur.png
 url: https://raw.githubusercontent.com/api-evangelist/indian-institute-of-technology-kharagpur/refs/heads/main/apis.yml
 tags:
   - Education
@@ -28,53 +39,9 @@ tags:
   - DSpace
   - India
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-07-25'
 specificationVersion: '0.19'
-apis:
-  - aid: indian-institute-of-technology-kharagpur:idr
-    name: Institutional Digital Repository (DSpace)
-    description: >-
-      The IIT Kharagpur Central Library Institutional Digital Repository is a
-      DSpace-based open repository that collects and preserves the scholarly
-      output of the IIT Kharagpur community. It is reachable via the public
-      DSpace XMLUI web interface; DSpace platforms conventionally expose
-      OAI-PMH metadata harvesting and item/bitstream access, though no
-      institute-specific API documentation is published.
-    humanURL: http://www.idr.iitkgp.ac.in/xmlui/
-    baseURL: http://www.idr.iitkgp.ac.in/xmlui/
-    tags: [ Library, Institutional Repository, DSpace, OAI-PMH, Research, Metadata ]
-    properties:
-      - type: Documentation
-        url: http://www.idr.iitkgp.ac.in/xmlui/
-  - aid: indian-institute-of-technology-kharagpur:irins
-    name: IRINS Research Information Portal
-    description: >-
-      IIT Kharagpur's Indian Research Information Network System (IRINS) portal,
-      hosted by INFLIBNET, is a web-based research-information management service
-      that showcases faculty and researcher profiles and scholarly output. IRINS
-      ingests publication and identity data through ORCID, Scopus, and Crossref
-      API workflows; the institute instance is publicly browsable but does not
-      publish its own developer API documentation.
-    humanURL: https://iitkgp.irins.org/
-    baseURL: https://iitkgp.irins.org/
-    tags: [ Research, Research Profiles, IRINS, INFLIBNET, ORCID, Scopus ]
-    properties:
-      - type: Documentation
-        url: https://iitkgp.irins.org/
-  - aid: indian-institute-of-technology-kharagpur:erp-sso
-    name: ERP / Single Sign-On (Gated)
-    description: >-
-      The official IIT Kharagpur ERP system provides a Single Sign-On
-      authentication server used by enrolled students and staff. The login and
-      SSO endpoints are live but gated behind credentials, secret-question, and
-      OTP verification, and there is no public API documentation. Listed for
-      completeness; community-built (unofficial) login helper packages exist but
-      are not endorsed by the institute.
-    humanURL: https://erp.iitkgp.ac.in/
-    tags: [ ERP, SSO, Authentication, Gated, Identity ]
-    properties:
-      - type: Documentation
-        url: https://erp.iitkgp.ac.in/
+apis: []
 common:
   - type: DomainSecurity
     url: security/indian-institute-of-technology-kharagpur-domain-security.yml
@@ -94,6 +61,12 @@ common:
     url: finops/indian-institute-of-technology-kharagpur-finops.yml
   - type: Review
     url: review.yml
+  - type: ProductPage
+    url: http://www.idr.iitkgp.ac.in/xmlui/
+  - type: ProductPage
+    url: https://iitkgp.irins.org/
+  - type: ProductPage
+    url: https://erp.iitkgp.ac.in/
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
