@@ -72,164 +72,141 @@ created: '2026-06-03'
 modified: '2026-09-01'
 specificationVersion: '0.23'
 apis:
-  - aid: indian-institute-of-technology-kharagpur:idr-opensearch
-    name: IIT Kharagpur Institutional Digital Repository OpenSearch Interface
-    x-operator: institution
-    description: >-
-      OpenSearch 1.1 query interface over the Central Library's Institutional Digital Repository,
-      running DSpace 6.0 self-hosted on the institute's own www.idr.iitkgp.ac.in. Verified live
-      2026-09-01 — /xmlui/open-search/description.xml returns a 603-byte description document
-      naming LongName "Central Library IIT Kharagpur" and Contact dspace-help@library.iitkgp.ac.in,
-      an institution address on the institution's own domain, and /xmlui/open-search/discover
-      returns an Atom 1.0 feed carrying the opensearch: and dc: namespaces. The repository holds
-      8,162 items; query, format, start, rpp, sort_by, order and scope were each exercised and
-      confirmed. DSpace is open-source software the institute installs and runs itself, not a
-      vendor tenancy, so the host, the contact, the identifiers and the content are all IIT
-      Kharagpur's — but the software is shared by thousands of deployments, so the OpenAPI stored
-      here is a derived description of THIS deployment's observed behaviour, not a DSpace product
-      contract. Three defects are recorded rather than smoothed over: the host has no TLS listener
-      (https:// fails, idr.iitkgp.ac.in does not resolve), every <id> and <link> in the feed is
-      emitted with the authority http://127.0.0.1, and the handle prefix is the DSpace installation
-      default 123456789, so no item carries a persistent identifier. No OAI-PMH provider, DSpace
-      REST API or SWORD service document is deployed — the nginx front end proxies only /xmlui.
-    humanURL: http://www.idr.iitkgp.ac.in/xmlui/
-    baseURL: http://www.idr.iitkgp.ac.in/xmlui/open-search/discover
-    tags:
-      - Research Repository
-      - Institutional Repository
-      - DSpace
-      - OpenSearch
-      - Atom
-      - Dublin Core
-      - Open Access
-      - Metadata
-    properties:
-      - type: OpenAPI
-        url: openapi/indian-institute-of-technology-kharagpur-idr-opensearch-openapi.yml
-      - type: APIReference
-        url: http://www.idr.iitkgp.ac.in/xmlui/open-search/description.xml
-      - type: Documentation
-        url: https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md
-      - type: JSONSchema
-        url: json-schema/indian-institute-of-technology-kharagpur-idr-opensearch-feed-schema.json
-      - type: Examples
-        url: examples/indian-institute-of-technology-kharagpur-idr-opensearch-atom.xml
-      - type: Examples
-        url: examples/indian-institute-of-technology-kharagpur-idr-opensearch-description.xml
-      - type: Authentication
-        url: authentication/indian-institute-of-technology-kharagpur-authentication.yml
-      - type: Errors
-        url: errors/indian-institute-of-technology-kharagpur-errors.yml
-      - type: Rules
-        url: rules/indian-institute-of-technology-kharagpur-rules.yml
-      - type: Vocabulary
-        url: vocabulary/indian-institute-of-technology-kharagpur-vocabulary.yml
-      - type: Lifecycle
-        url: lifecycle/indian-institute-of-technology-kharagpur-lifecycle.yml
-      - type: Conformance
-        url: conformance/indian-institute-of-technology-kharagpur-conformance.yml
-  - aid: indian-institute-of-technology-kharagpur:erp-cep-brochures
-    name: IIT Kharagpur ERP Continuing Education Programme Brochure Endpoint
-    x-operator: institution
-    description: >-
-      The only unauthenticated endpoint on the IIT Kharagpur estate that the institute wrote
-      itself. The ERP at erp.iitkgp.ac.in is a JAX-RS application on Apache Tomcat 8.0.51 behind a
-      bespoke session SSO — /InfoCellDetails/resources/application.wadl 302s to
-      /SSOAdministration/login.htm and /InfoCellDetails/ returns 403 — but one resource namespace,
-      /InfoCellDetails/resources/external/, is deliberately open, and the institute's own homepage
-      links a single operation in it, cepdata, two hundred times, once per Continuing Education
-      Programme course. GET with a structured course_id returns the course brochure as
-      application/pdf with no key, cookie or Referer required. Verified live 2026-09-01 against
-      eight course_id values: five returned PDFs of 74 KB to 2.25 MB, three returned HTTP 200 with
-      Content-Type text/plain and a zero-byte body, which is also the response to an unknown
-      course_id and to no course_id at all — there is no 404. Accept: application/json returns 406
-      with a Tomcat error page. This is a real course-catalog surface, small and undocumented, and
-      it is institution engineering rather than a vendor's.
-    humanURL: https://www.iitkgp.ac.in/
-    baseURL: https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/cepdata
-    tags:
-      - Course Catalog
-      - Continuing Education
-      - ERP
-      - Documents
-      - Undocumented
-    properties:
-      - type: OpenAPI
-        url: openapi/indian-institute-of-technology-kharagpur-erp-cep-openapi.yml
-      - type: JSONSchema
-        url: json-schema/indian-institute-of-technology-kharagpur-erp-cep-request-schema.json
-      - type: Examples
-        url: examples/indian-institute-of-technology-kharagpur-erp-cep-brochure-exchange.txt
-      - type: Authentication
-        url: authentication/indian-institute-of-technology-kharagpur-authentication.yml
-      - type: Errors
-        url: errors/indian-institute-of-technology-kharagpur-errors.yml
-      - type: Rules
-        url: rules/indian-institute-of-technology-kharagpur-rules.yml
-      - type: Lifecycle
-        url: lifecycle/indian-institute-of-technology-kharagpur-lifecycle.yml
-  - aid: indian-institute-of-technology-kharagpur:irins
-    name: IIT Kharagpur IRINS Research Profile Portal (INFLIBNET tenant)
-    x-operator: tenant
-    description: >-
-      Indian Research Information Network System (IRINS) research-profile portal for IIT Kharagpur,
-      operated by INFLIBNET — an autonomous inter-university centre of the UGC — at the
-      institution-specific subdomain iitkgp.irins.org. The profiles, publications and affiliations
-      are IIT Kharagpur's; the platform, the software and any contract are INFLIBNET's, and no
-      IRINS specification is stored in this repository. Verified 2026-09-01: iitkgp.irins.org
-      returns HTTP 403 with a Cloudflare "Just a moment..." challenge to every automated client,
-      including one sending a full Chrome header set, as does irins.org itself. That is a live host
-      refusing automation, not a dead one, so no machine-readable surface behind it could be
-      assessed and INFLIBNET's platform-level claims of ORCID, Scopus and Crossref ingestion are
-      recorded as unverified rather than credited to the institution.
-    humanURL: https://iitkgp.irins.org/
-    tags:
-      - Research Information
-      - CRIS
-      - IRINS
-      - INFLIBNET
-      - Tenant
-      - Bot Blocked
-    properties:
-      - type: Documentation
-        url: https://irins.inflibnet.ac.in/
-  - aid: indian-institute-of-technology-kharagpur:alumni-network
-    name: IIT Kharagpur Alumni Network (AlmaConnect tenant)
-    x-operator: tenant
-    description: >-
-      The alumni network at alumni.iitkgp.ac.in is an AlmaConnect deployment. The hostname is the
-      institute's but the DNS record is a CNAME to
-      alumni.iitkgp.ac.in.s3-website.ap-south-1.amazonaws.com, and the page served is an
-      AlmaConnect single-page application (title "AlmaConnect", 2,464-byte shell, HTTP only — the
-      https:// form times out). The alumni data is IIT Kharagpur's; the platform and its contract
-      are AlmaConnect's, and none of it is stored here. Recorded as a tenant relationship because
-      it is a real institutional fact, not because the institute engineered anything.
-    humanURL: http://alumni.iitkgp.ac.in/
-    tags:
-      - Alumni
-      - AlmaConnect
-      - Tenant
-      - CNAME Tenancy
-  - aid: indian-institute-of-technology-kharagpur:ror
-    name: Research Organization Registry membership
-    x-operator: registry
-    description: >-
-      IIT Kharagpur is registered in ROR as https://ror.org/03w5sq511, "Indian Institute of
-      Technology Kharagpur" (aliases IIT KGP, IIT Kharagpur), linked to http://www.iitkgp.ac.in/.
-      Retrieved from https://api.ror.org/v2/organizations on 2026-09-01. This is a registry the
-      institution is registered IN — a fact about it — not a contract it operates; ROR's own API
-      belongs to ROR and is not stored here. It is the institute's only verifiable identifier
-      registration: DataCite returns zero providers and zero clients for Kharagpur, Crossref
-      returns zero members, and the repository's handle prefix is the DSpace default.
-    humanURL: https://ror.org/03w5sq511
-    tags:
-      - Registry
-      - Identifiers
-      - ROR
-      - Organization Identifier
-    properties:
-      - type: Documentation
-        url: https://ror.readme.io/
+- aid: indian-institute-of-technology-kharagpur:irins
+  name: IIT Kharagpur IRINS Research Profile Portal (INFLIBNET tenant)
+  x-operator: tenant
+  description: >-
+    Indian Research Information Network System (IRINS) research-profile portal for IIT Kharagpur, operated
+    by INFLIBNET — an autonomous inter-university centre of the UGC — at the institution-specific subdomain
+    iitkgp.irins.org. The profiles, publications and affiliations are IIT Kharagpur's; the platform, the
+    software and any contract are INFLIBNET's, and no IRINS specification is stored in this repository.
+    Verified 2026-09-01: iitkgp.irins.org returns HTTP 403 with a Cloudflare "Just a moment..." challenge
+    to every automated client, including one sending a full Chrome header set, as does irins.org itself.
+    That is a live host refusing automation, not a dead one, so no machine-readable surface behind it
+    could be assessed and INFLIBNET's platform-level claims of ORCID, Scopus and Crossref ingestion are
+    recorded as unverified rather than credited to the institution.
+  humanURL: https://iitkgp.irins.org/
+  tags:
+  - Research Information
+  - CRIS
+  - IRINS
+  - INFLIBNET
+  - Tenant
+  - Bot Blocked
+  properties:
+  - type: Documentation
+    url: https://irins.inflibnet.ac.in/
+- aid: indian-institute-of-technology-kharagpur:alumni-network
+  name: IIT Kharagpur Alumni Network (AlmaConnect tenant)
+  x-operator: tenant
+  description: >-
+    The alumni network at alumni.iitkgp.ac.in is an AlmaConnect deployment. The hostname is the institute's
+    but the DNS record is a CNAME to alumni.iitkgp.ac.in.s3-website.ap-south-1.amazonaws.com, and the
+    page served is an AlmaConnect single-page application (title "AlmaConnect", 2,464-byte shell, HTTP
+    only — the https:// form times out). The alumni data is IIT Kharagpur's; the platform and its contract
+    are AlmaConnect's, and none of it is stored here. Recorded as a tenant relationship because it is
+    a real institutional fact, not because the institute engineered anything.
+  humanURL: http://alumni.iitkgp.ac.in/
+  tags:
+  - Alumni
+  - AlmaConnect
+  - Tenant
+  - CNAME Tenancy
+- aid: indian-institute-of-technology-kharagpur:ror
+  name: Research Organization Registry membership
+  x-operator: registry
+  description: >-
+    IIT Kharagpur is registered in ROR as https://ror.org/03w5sq511, "Indian Institute of Technology Kharagpur"
+    (aliases IIT KGP, IIT Kharagpur), linked to http://www.iitkgp.ac.in/. Retrieved from https://api.ror.org/v2/organizations
+    on 2026-09-01. This is a registry the institution is registered IN — a fact about it — not a contract
+    it operates; ROR's own API belongs to ROR and is not stored here. It is the institute's only verifiable
+    identifier registration: DataCite returns zero providers and zero clients for Kharagpur, Crossref
+    returns zero members, and the repository's handle prefix is the DSpace default.
+  humanURL: https://ror.org/03w5sq511
+  tags:
+  - Registry
+  - Identifiers
+  - ROR
+  - Organization Identifier
+  properties:
+  - type: Documentation
+    url: https://ror.readme.io/
+- aid: >-
+    indian-institute-of-technology-kharagpur:indian-institute-of-technology-kharagpur-continuing-education-api
+  name: Indian Institute of Technology Kharagpur Continuing Education API
+  description: >-
+    Continuing Education Programme course documents. One operation, verified live 2026-09-01.
+  humanURL: http://www.idr.iitkgp.ac.in/xmlui/
+  baseURL: http://www.idr.iitkgp.ac.in/xmlui/open-search/discover
+  tags:
+  - continuing-education
+  properties:
+  - type: OpenAPI
+    url: openapi/indian-institute-of-technology-kharagpur-continuing-education-api-openapi.yml
+  - type: APIReference
+    url: http://www.idr.iitkgp.ac.in/xmlui/open-search/description.xml
+  - type: Documentation
+    url: https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md
+  - type: JSONSchema
+    url: json-schema/indian-institute-of-technology-kharagpur-idr-opensearch-feed-schema.json
+  - type: Examples
+    url: examples/indian-institute-of-technology-kharagpur-idr-opensearch-atom.xml
+  - type: Examples
+    url: examples/indian-institute-of-technology-kharagpur-idr-opensearch-description.xml
+  - type: Authentication
+    url: authentication/indian-institute-of-technology-kharagpur-authentication.yml
+  - type: Errors
+    url: errors/indian-institute-of-technology-kharagpur-errors.yml
+  - type: Rules
+    url: rules/indian-institute-of-technology-kharagpur-rules.yml
+  - type: Vocabulary
+    url: vocabulary/indian-institute-of-technology-kharagpur-vocabulary.yml
+  - type: Lifecycle
+    url: lifecycle/indian-institute-of-technology-kharagpur-lifecycle.yml
+  - type: Conformance
+    url: conformance/indian-institute-of-technology-kharagpur-conformance.yml
+  - type: JSONSchema
+    url: json-schema/indian-institute-of-technology-kharagpur-erp-cep-request-schema.json
+  - type: Examples
+    url: examples/indian-institute-of-technology-kharagpur-erp-cep-brochure-exchange.txt
+- aid: >-
+    indian-institute-of-technology-kharagpur:indian-institute-of-technology-kharagpur-opensearch-api
+  name: Indian Institute of Technology Kharagpur Opensearch API
+  description: >-
+    OpenSearch 1.1 description and query operations. All parameters verified live 2026-09-01.
+  humanURL: http://www.idr.iitkgp.ac.in/xmlui/
+  baseURL: http://www.idr.iitkgp.ac.in/xmlui/open-search/discover
+  tags:
+  - opensearch
+  properties:
+  - type: OpenAPI
+    url: openapi/indian-institute-of-technology-kharagpur-opensearch-api-openapi.yml
+  - type: APIReference
+    url: http://www.idr.iitkgp.ac.in/xmlui/open-search/description.xml
+  - type: Documentation
+    url: https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md
+  - type: JSONSchema
+    url: json-schema/indian-institute-of-technology-kharagpur-idr-opensearch-feed-schema.json
+  - type: Examples
+    url: examples/indian-institute-of-technology-kharagpur-idr-opensearch-atom.xml
+  - type: Examples
+    url: examples/indian-institute-of-technology-kharagpur-idr-opensearch-description.xml
+  - type: Authentication
+    url: authentication/indian-institute-of-technology-kharagpur-authentication.yml
+  - type: Errors
+    url: errors/indian-institute-of-technology-kharagpur-errors.yml
+  - type: Rules
+    url: rules/indian-institute-of-technology-kharagpur-rules.yml
+  - type: Vocabulary
+    url: vocabulary/indian-institute-of-technology-kharagpur-vocabulary.yml
+  - type: Lifecycle
+    url: lifecycle/indian-institute-of-technology-kharagpur-lifecycle.yml
+  - type: Conformance
+    url: conformance/indian-institute-of-technology-kharagpur-conformance.yml
+  - type: JSONSchema
+    url: json-schema/indian-institute-of-technology-kharagpur-erp-cep-request-schema.json
+  - type: Examples
+    url: examples/indian-institute-of-technology-kharagpur-erp-cep-brochure-exchange.txt
 common:
   - type: Website
     url: https://www.iitkgp.ac.in/
