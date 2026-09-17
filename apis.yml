@@ -170,17 +170,17 @@ apis:
   - type: Examples
     url: examples/indian-institute-of-technology-kharagpur-erp-cep-brochure-exchange.txt
 - aid: >-
-    indian-institute-of-technology-kharagpur:indian-institute-of-technology-kharagpur-opensearch-api
-  name: Indian Institute of Technology Kharagpur Opensearch API
+    indian-institute-of-technology-kharagpur:indian-institute-of-technology-kharagpur-open-search-api
+  name: Indian Institute of Technology Kharagpur Open Search API
   description: >-
     OpenSearch 1.1 description and query operations. All parameters verified live 2026-09-01.
-  humanURL: http://www.idr.iitkgp.ac.in/xmlui/
+  humanURL: https://iitkgp.irins.org/
   baseURL: http://www.idr.iitkgp.ac.in/xmlui/open-search/discover
   tags:
-  - opensearch
+  - Open Search
   properties:
   - type: OpenAPI
-    url: openapi/indian-institute-of-technology-kharagpur-opensearch-api-openapi.yml
+    url: openapi/indian-institute-of-technology-kharagpur-open-search-api-openapi.yml
   - type: APIReference
     url: http://www.idr.iitkgp.ac.in/xmlui/open-search/description.xml
   - type: Documentation
