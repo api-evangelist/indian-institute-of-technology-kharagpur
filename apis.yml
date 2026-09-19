@@ -88,6 +88,13 @@ apis:
   humanURL: https://iitkgp.irins.org/
   tags:
   - Research Information
+  - CRI
+  - IRINS
+  - INFLIBNET
+  - Tenants
+  - Bot Blocked
+  tags_raw:
+  - Research Information
   - CRIS
   - IRINS
   - INFLIBNET
@@ -108,6 +115,11 @@ apis:
     a real institutional fact, not because the institute engineered anything.
   humanURL: http://alumni.iitkgp.ac.in/
   tags:
+  - Alumni
+  - AlmaConnect
+  - Tenants
+  - CNAME Tenancy
+  tags_raw:
   - Alumni
   - AlmaConnect
   - Tenant
@@ -139,6 +151,8 @@ apis:
   humanURL: http://www.idr.iitkgp.ac.in/xmlui/
   baseURL: http://www.idr.iitkgp.ac.in/xmlui/open-search/discover
   tags:
+  - Continuing Education
+  tags_raw:
   - continuing-education
   properties:
   - type: OpenAPI
@@ -177,6 +191,8 @@ apis:
   humanURL: https://iitkgp.irins.org/
   baseURL: http://www.idr.iitkgp.ac.in/xmlui/open-search/discover
   tags:
+  - OpenSearch
+  tags_raw:
   - Open Search
   properties:
   - type: OpenAPI
