@@ -1,0 +1,13 @@
+<!-- generated: 2026-09-01 | method: probed | x-operator: institution
+     source: http://www.idr.iitkgp.ac.in/xmlui/open-search/description.xml | HTTP 200 -->
+<?xml version="1.0" encoding="UTF-8"?><OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+<ShortName>DSpace</ShortName>
+<LongName>Central Library IIT Kharagpur</LongName>
+<Description>Central Library IIT Kharagpur DSpace repository</Description>
+<InputEncoding>UTF-8</InputEncoding>
+<OutputEncoding>UTF-8</OutputEncoding>
+<Query role="example" searchTerms="photosynthesis"/>
+<Tags>IR DSpace</Tags>
+<Contact>dspace-help@library.iitkgp.ac.in</Contact>
+<Image height="16" type="image/vnd.microsoft.icon" width="16">http://www.dspace.org/images/favicon.ico</Image>
+</OpenSearchDescription>

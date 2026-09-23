@@ -1,0 +1,51 @@
+generated: '2026-09-01'
+method: probed
+source: Live probes of IIT Kharagpur hosts, 2026-09-01.
+provider: Indian Institute of Technology Kharagpur
+providerId: indian-institute-of-technology-kharagpur
+x-operator: institution
+description: >-
+  Versioning and change posture. IIT Kharagpur publishes no changelog, no deprecation policy, no
+  status page and no API versioning scheme on any surface. Everything below is observed, not stated.
+surfaces:
+  - name: IIT Kharagpur Institutional Digital Repository OpenSearch interface
+    url: http://www.idr.iitkgp.ac.in/xmlui/open-search/discover
+    x-operator: institution
+    versioning: >-
+      None assigned by the institution. The protocol is OpenSearch 1.1 (namespace
+      http://a9.com/-/spec/opensearch/1.1/, read from the live feed) and the software is DSpace
+      6.0 (read from the Generator meta tag on /xmlui/). DSpace 6.0 reached end of support in
+      2023; DSpace 7 replaced the XMLUI with an Angular UI and a REST API, neither of which is
+      deployed here. There is no versioned base path and no version header.
+    change_signal: >-
+      Atom <updated>/<published> per item, plus /xmlui/feed/{rss_1.0,rss_2.0,atom_1.0}/site and
+      /xmlui/recent-submissions. No deleted-record semantics are available, because no OAI-PMH
+      provider is deployed — a consumer cannot learn that an item was withdrawn.
+    deprecation_policy: none published
+    status_page: none found
+    transport_risk: >-
+      HTTP only. https://www.idr.iitkgp.ac.in does not complete a TLS handshake, and the bare
+      host idr.iitkgp.ac.in does not resolve. Any future move to HTTPS or to DSpace 7 will break
+      every stored URL, and the identifiers the repository itself emits (http://127.0.0.1/xmlui/...)
+      are already broken.
+  - name: IIT Kharagpur ERP Continuing Education Programme brochure endpoint
+    url: https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/cepdata
+    x-operator: institution
+    versioning: >-
+      None. No version in the path, no version parameter, no version header. The runtime is
+      Apache Tomcat 8.0.51 (from the 406 error page), which is itself long out of support.
+    change_signal: >-
+      The only index of valid course_id values is the institute homepage, which re-renders each
+      admissions cycle. course_id embeds the academic year (2025-2026, 2026-2027), so a stored
+      identifier ages out with the course rather than being deprecated.
+    deprecation_policy: none published
+    status_page: none found
+  - name: IIT Kharagpur ERP (gated)
+    url: https://erp.iitkgp.ac.in/
+    x-operator: institution
+    versioning: >-
+      The application is named IIT_ERP3 in its own paths, which is the only version signal
+      available from outside. The JAX-RS WADL exists but is behind SSO.
+    change_signal: none observable
+    deprecation_policy: none published
+    status_page: none found

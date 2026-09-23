@@ -1,0 +1,36 @@
+# Front Door AI Index — indian-institute-of-technology-kharagpur — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: indian-institute-of-technology-kharagpur
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.iitkgp.ac.in
+  final_host: www.iitkgp.ac.in
+  ownership: own
+  owner: indian-institute-of-technology-kharagpur
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 48
+  host_score: 48
+  density: 12.18
+  words: 3940
+  tiers:
+    agentic: 5
+    core: 43
+    model: 0
+  ambiguous: 4
+  top_terms:
+    AI: 22
+    ML: 6
+    generative ai: 5
+    agentic: 4
+    machine learning: 4
+    gen ai: 2
+    smart: 2
+    LLMs: 1
+    MCP: 1
+    artificial intelligence: 1
+    automation: 1
+    intelligence: 1

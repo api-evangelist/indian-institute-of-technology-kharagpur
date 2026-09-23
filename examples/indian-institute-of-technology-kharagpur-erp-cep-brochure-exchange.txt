@@ -1,0 +1,19 @@
+# generated: 2026-09-01
+# method: probed
+# x-operator: institution
+# source: GET https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/cepdata?course_id=CEP/WRK/25-26/CD/2325
+# note: the response body is a 241,965-byte PDF course brochure and is not stored here; only the
+#       HTTP exchange is recorded. Content-Type is application/pdf on a hit; a course_id with no
+#       published brochure returns HTTP 200 with Content-Type text/plain and a zero-byte body.
+# ---- response headers, verbatim ----
+HTTP/1.1 200 OK
+Date: Tue, 01 Sep 2026 20:04:16 GMT
+Server: Apache
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+Set-Cookie: JSESSIONID=6BDAB968FE3A5FAF0974DC1A6A260E47.node6; Path=/InfoCellDetails; Secure; HttpOnly
+X-FRAME-OPTIONS: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Transfer-Encoding: chunked
+Content-Type: application/pdf
+

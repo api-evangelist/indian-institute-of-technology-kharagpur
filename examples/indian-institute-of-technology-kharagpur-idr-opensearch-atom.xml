@@ -1,0 +1,44 @@
+<!-- generated: 2026-09-01 | method: probed | x-operator: institution
+     source: http://www.idr.iitkgp.ac.in/xmlui/open-search/discover?query=rice&format=atom&rpp=2 | HTTP 200 application/atom+xml
+     note: every <id> and <link> in this live response is http://127.0.0.1/xmlui/... — the DSpace
+     dspace.baseUrl is misconfigured, so the machine-readable identifiers are not dereferenceable. -->
+<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<title>Central Library IIT Kharagpur</title>
+<link href="http://127.0.0.1/xmlui" rel="alternate"/>
+<subtitle>The DSpace digital repository system captures, stores, indexes, preserves, and distributes digital research material.</subtitle>
+<id xmlns="http://apache.org/cocoon/i18n/2.1">http://127.0.0.1/xmlui</id>
+<updated>2026-09-01T20:04:01Z</updated>
+<dc:date>2026-09-01T20:04:01Z</dc:date>
+<opensearch:itemsPerPage>2</opensearch:itemsPerPage>
+<opensearch:totalResults>854</opensearch:totalResults>
+<opensearch:startIndex>1</opensearch:startIndex>
+<opensearch:Query role="request" searchTerms="rice" startPage="1"/>
+<entry>
+<title>Development and Study of a Pneumatic Rice Polishing System</title>
+<link href="http://127.0.0.1/xmlui/handle/123456789/8724" rel="alternate"/>
+<author>
+<name>Chodisetti, Someswararao</name>
+</author>
+<id>http://127.0.0.1/xmlui/handle/123456789/8724</id>
+<updated>2017-12-15T10:06:25Z</updated>
+<published>2017-10-01T00:00:00Z</published>
+<summary type="text">Development and Study of a Pneumatic Rice Polishing System
+Chodisetti, Someswararao
+</summary>
+<dc:date>2017-10-01T00:00:00Z</dc:date>
+</entry>
+<entry>
+<title>Water Regimes and Soil Manipulation Effecting Water Economy in Irrigated Rice</title>
+<link href="http://127.0.0.1/xmlui/handle/123456789/14272" rel="alternate"/>
+<author>
+<name>Singh, Harbans</name>
+</author>
+<id>http://127.0.0.1/xmlui/handle/123456789/14272</id>
+<updated>2024-05-27T04:38:11Z</updated>
+<published>1972-12-01T00:00:00Z</published>
+<summary type="text">Water Regimes and Soil Manipulation Effecting Water Economy in Irrigated Rice
+Singh, Harbans
+</summary>
+<dc:date>1972-12-01T00:00:00Z</dc:date>
+</entry>
+</feed>

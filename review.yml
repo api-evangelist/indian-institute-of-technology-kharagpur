@@ -3,8 +3,79 @@ name: Indian Institute of Technology Kharagpur
 description: Indian Institute of Technology Kharagpur public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/indian-institute-of-technology-kharagpur/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-09-01'
 reviews:
+  - date: '2026-09-01'
+    rating: 3
+    summary: >-
+      Re-reviewed under the university pipeline, with operator attribution settled before anything
+      was saved. IIT Kharagpur still has no developer portal, no published OpenAPI and no key
+      issuance — but the June 2026 review's conclusion that it exposes no institute-authored API
+      docs understated what it actually operates. Two unauthenticated, institution-operated machine
+      surfaces were found by probing. First, the Central Library's DSpace 6.0 Institutional Digital
+      Repository serves a valid OpenSearch 1.1 description document and an Atom query endpoint at
+      www.idr.iitkgp.ac.in/xmlui/open-search/, verified across seven parameter combinations over
+      8,162 items, with an institution contact address (dspace-help@library.iitkgp.ac.in) in the
+      description. Second, and undocumented anywhere, the institute's own ERP exposes a public
+      JAX-RS resource at /InfoCellDetails/resources/external/cepdata that returns a Continuing
+      Education Programme brochure PDF for a structured course_id; the institute homepage links it
+      200 times. The June review's open question about the OAI endpoint is now closed as a negative:
+      six conventional OAI base URLs return 404 and the nginx front end proxies only /xmlui, so no
+      OAI-PMH provider exists. Three defects are recorded rather than smoothed over — the repository
+      host has no TLS listener, every identifier in its feed is emitted as http://127.0.0.1/xmlui,
+      and the handle prefix is the DSpace default 123456789 so no item has a persistent identifier.
+      No Shibboleth/SAML IdP for iitkgp.ac.in exists anywhere in eduGAIN, including India's own
+      INFED federation where peer IITs are registered; the institute is not a DataCite or Crossref
+      member. IRINS (iitkgp.irins.org, INFLIBNET, Cloudflare-blocked 403) and the AlmaConnect alumni
+      network (alumni.iitkgp.ac.in, a CNAME to an S3 website) are recorded as tenant relationships,
+      with no vendor contract saved. The institute website returns HTTP 200 with an Angular shell for
+      /llms.txt, /.well-known/security.txt and /sitemap.xml alike — all soft 404s, none credited.
+    endpoints:
+      - url: http://www.idr.iitkgp.ac.in/xmlui/open-search/description.xml
+        status: 200
+        note: OpenSearch 1.1 description document, 603 bytes, Contact dspace-help@library.iitkgp.ac.in.
+      - url: http://www.idr.iitkgp.ac.in/xmlui/open-search/discover?query=*&format=atom&rpp=1
+        status: 200
+        note: Atom feed, opensearch:totalResults 8162 — the whole repository.
+      - url: http://www.idr.iitkgp.ac.in/oai/request?verb=Identify
+        status: 404
+        note: No OAI-PMH provider. Also 404 at /dspace-oai/request, /server/oai/request, /OAI/request, /xmlui/OAI/request, /xmlui/oai/request.
+      - url: http://www.idr.iitkgp.ac.in/rest/status
+        status: 404
+        note: No DSpace REST API; nginx proxies only /xmlui.
+      - url: https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/cepdata?course_id=CEP/WRK/25-26/CD/2325
+        status: 200
+        note: Public, unauthenticated — returns a 241,965-byte application/pdf course brochure.
+      - url: https://erp.iitkgp.ac.in/InfoCellDetails/resources/application.wadl
+        status: 302
+        note: JAX-RS WADL exists but 302s to /SSOAdministration/login.htm — the ERP contract is gated.
+      - url: https://erp.iitkgp.ac.in/InfoCellDetails/
+        status: 403
+        note: Everything outside /resources/external is closed.
+      - url: https://technical.edugain.org/api.php?action=list_entities&format=json
+        status: 200
+        note: 10,616 eduGAIN entities; zero match iitkgp/Kharagpur/KGP. INFED contributes 379, none IIT KGP.
+      - url: https://api.datacite.org/clients?query=Kharagpur
+        status: 200
+        note: meta.total 0 — not a DataCite member, no DOI prefix.
+      - url: https://api.crossref.org/members?query=Kharagpur
+        status: 200
+        note: total-results 0 — not a Crossref member.
+      - url: https://api.ror.org/v2/organizations?query=Indian%20Institute%20of%20Technology%20Kharagpur
+        status: 200
+        note: ROR 03w5sq511 — the institute's only verifiable identifier registration.
+      - url: https://iitkgp.irins.org/
+        status: 403
+        note: Cloudflare "Just a moment..." challenge to every automated client; live but unreadable. Tenant surface.
+      - url: http://alumni.iitkgp.ac.in/
+        status: 200
+        note: AlmaConnect SPA; CNAME to alumni.iitkgp.ac.in.s3-website.ap-south-1.amazonaws.com. Tenant surface.
+      - url: https://hpc.iitkgp.ac.in/
+        status: 200
+        note: PARAM Shakti HPC facility — real institution-operated site with robots.txt and sitemap.xml; allocation app at /app is session-gated.
+      - url: https://www.iitkgp.ac.in/llms.txt
+        status: 200
+        note: SOFT 404 — returns the 47,510-byte Angular shell, byte-identical to the homepage. Same for /.well-known/security.txt and /sitemap.xml.
   - date: '2026-06-03'
     rating: 2
     summary: >-

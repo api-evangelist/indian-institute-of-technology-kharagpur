@@ -1,0 +1,85 @@
+generated: '2026-09-01'
+method: derived
+source: >-
+  Terms read out of live responses from http://www.idr.iitkgp.ac.in/xmlui/ and
+  https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/cepdata, 2026-09-01.
+x-operator: institution
+vocabulary:
+  name: IIT Kharagpur Institution-Operated Surface Vocabulary
+  description: >-
+    Terms actually used by the surfaces IIT Kharagpur operates itself. Terms belonging to the
+    IRINS and AlmaConnect tenant deployments are deliberately excluded — they are the vendors'
+    vocabularies, not the institute's.
+  terms:
+    - term: course_id
+      definition: >-
+        The required query parameter of the ERP Continuing Education Programme brochure endpoint.
+        A structured institutional identifier, not an opaque key, in one of two observed shapes:
+        IIT/CEP/<programme>/<programme>/<academic year>/<department code>/<serial> (e.g.
+        IIT/CEP/CFC/CFC/2025-2026/HS/144) or CEP/<type>/<yy-yy>/<department code>/<serial> (e.g.
+        CEP/WRK/25-26/CD/2325). Slashes are sent unencoded by the institute's own links.
+      tags: [identifier, course-catalog, erp]
+    - term: CEP
+      definition: >-
+        Continuing Education Programme — the institute's professional and executive education
+        arm, and the only academic programme whose course records are reachable without SSO.
+      tags: [programme, course-catalog]
+    - term: CFC / CON / CSC / WRK
+      definition: >-
+        Programme-type codes observed inside course_id — respectively the Certificate/Foundation
+        course family, continuing-education courses, short courses and workshops.
+      tags: [taxonomy, course-catalog]
+    - term: 'department code (AE, AG, AI, AP, AR, BM, BT, CD, CP, CS, CY, DO, EC, ES, HS, IP, MI, MM, MT, NA, RT)'
+      definition: >-
+        Two-letter academic-unit codes carried in the penultimate segment of course_id
+        (Aerospace, Agricultural, Artificial Intelligence, Applied Physics, Architecture,
+        Biomedical, Biotechnology, Career Development, Chemical Process, Computer Science,
+        Chemistry, Distance/Open, Electronics & Communication, Earth Sciences, Humanities &
+        Social Sciences, Industrial Production, Mining, Metallurgical & Materials, Mathematics,
+        Naval Architecture, Rubber Technology). Observed values only; the institute publishes no
+        code list.
+      tags: [taxonomy, course-catalog]
+    - term: InfoCellDetails
+      definition: >-
+        The name of the JAX-RS web application inside the IIT Kharagpur ERP that hosts the public
+        `external` resource namespace. Its own WADL is SSO-gated.
+      tags: [erp, application]
+    - term: resources/external
+      definition: >-
+        The one path segment of the ERP deliberately exposed without authentication. Everything
+        else under /InfoCellDetails/resources/ 302s to the SSO login; /InfoCellDetails/ itself
+        returns 403.
+      tags: [erp, access]
+    - term: 'handle 123456789/{id}'
+      definition: >-
+        The item identifier scheme of the Institutional Digital Repository. 123456789 is the
+        DSpace installation default prefix, meaning no Handle prefix has been registered with
+        the Handle System and repository items therefore carry no persistent identifier.
+      tags: [identifier, repository]
+    - term: rpp
+      definition: >-
+        DSpace OpenSearch "results per page" parameter; echoed back as opensearch:itemsPerPage.
+        Default 20 when omitted.
+      tags: [parameter, repository]
+    - term: scope
+      definition: >-
+        DSpace OpenSearch parameter restricting a search to one community or collection handle.
+        Verified live — scope=123456789/1 narrowed a result set from 854 to 852.
+      tags: [parameter, repository]
+    - term: dc.date.issued_dt
+      definition: >-
+        The Solr sort field accepted by the repository's sort_by parameter, and the underlying
+        index name behind /xmlui/browse?type=dateissued.
+      tags: [metadata, dublin-core, repository]
+    - term: IDR
+      definition: >-
+        Institutional Digital Repository — the Central Library's DSpace 6.0 instance at
+        www.idr.iitkgp.ac.in, holding 8,162 items as of 2026-09-01 and described by the library
+        as the first institutional repository among the IITs.
+      tags: [repository]
+    - term: PARAM Shakti
+      definition: >-
+        The institute's National Supercomputing Mission cluster, operated by the HPC facility at
+        hpc.iitkgp.ac.in alongside an NVIDIA DGX AI cluster. Allocation and job accounting run in
+        a session-gated "HPC ERP System" at hpc.iitkgp.ac.in/app; no API is exposed.
+      tags: [research-computing]

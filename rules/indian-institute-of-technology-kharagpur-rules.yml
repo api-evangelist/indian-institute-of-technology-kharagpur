@@ -1,0 +1,78 @@
+generated: '2026-09-01'
+method: derived
+source: >-
+  Rules written against the two institution-operated contracts in openapi/, derived from live
+  behaviour observed on 2026-09-01. Not published by IIT Kharagpur.
+x-operator: institution
+description: >-
+  Consumption rules for IIT Kharagpur's two unauthenticated surfaces. Each rule exists because the
+  behaviour it guards against was actually observed, not because a linter template suggested it.
+rules:
+  - id: cep-never-branch-on-status
+    surface: erp-cep
+    severity: error
+    rule: >-
+      Never treat HTTP 200 from /resources/external/cepdata as "brochure found". An unknown
+      course_id, a course with no brochure and a missing course_id all return 200. Branch on
+      Content-Type == application/pdf, or on a non-zero Content-Length.
+  - id: cep-do-not-negotiate
+    surface: erp-cep
+    severity: warning
+    rule: >-
+      Do not send Accept: application/json. The resource produces application/pdf only and answers
+      406 with a Tomcat HTML error page. Send no Accept header, or Accept: application/pdf.
+  - id: cep-leave-slashes-unencoded
+    surface: erp-cep
+    severity: warning
+    rule: >-
+      course_id contains forward slashes and the institute's own links send them unencoded. Percent
+      encoding them was not observed to be supported; reproduce the institute's own form.
+  - id: cep-no-enumeration
+    surface: erp-cep
+    severity: info
+    rule: >-
+      There is no list operation. The only published index of valid course_id values is the
+      institute homepage at https://www.iitkgp.ac.in/, which links 200 of them. Scrape the index
+      from there; do not guess serial numbers.
+  - id: idr-rewrite-localhost-identifiers
+    surface: idr-opensearch
+    severity: error
+    rule: >-
+      Every <id> and <link> in the repository feed is emitted with the authority
+      http://127.0.0.1. Rewrite the authority to http://www.idr.iitkgp.ac.in before storing or
+      dereferencing an identifier, and never persist the raw value — it will resolve to the
+      consumer's own machine.
+  - id: idr-request-atom-explicitly
+    surface: idr-opensearch
+    severity: warning
+    rule: >-
+      Pass format=atom. Every other value of format, including unsupported ones, silently returns
+      text/xml rather than erroring, so a client that omits it cannot tell whether its requested
+      representation was honoured.
+  - id: idr-empty-query-is-not-an-error
+    surface: idr-opensearch
+    severity: warning
+    rule: >-
+      A missing query returns 200 with an empty feed. Check opensearch:totalResults, not the status
+      code, before concluding that a search matched nothing.
+  - id: idr-plaintext-transport
+    surface: idr-opensearch
+    severity: error
+    rule: >-
+      The repository host has no TLS listener; https://www.idr.iitkgp.ac.in does not complete a
+      handshake and idr.iitkgp.ac.in does not resolve. Treat all traffic as observable, send no
+      credentials, and do not embed these URLs in an HTTPS page that will block mixed content.
+  - id: idr-no-harvest-path
+    surface: idr-opensearch
+    severity: info
+    rule: >-
+      There is no OAI-PMH provider and no deleted-record signal. Incremental harvesting is not
+      possible; a consumer wanting a full corpus must page the search endpoint with query=* and
+      rpp, and cannot learn that an item was withdrawn.
+  - id: no-vendor-surface-as-institution
+    surface: all
+    severity: error
+    rule: >-
+      Do not attribute iitkgp.irins.org (INFLIBNET) or alumni.iitkgp.ac.in (AlmaConnect) contracts
+      to IIT Kharagpur. Both are tenant deployments: the data is the institute's, the contract is
+      the vendor's, and no vendor spec is stored in this repository.

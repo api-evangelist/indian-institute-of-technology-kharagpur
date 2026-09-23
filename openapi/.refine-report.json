@@ -1,0 +1,30 @@
+{
+  "provider": "indian-institute-of-technology-kharagpur",
+  "sources": [
+    "_original/indian-institute-of-technology-kharagpur-erp-cep-openapi.yml",
+    "_original/indian-institute-of-technology-kharagpur-idr-opensearch-openapi.yml"
+  ],
+  "outputs": [
+    "indian-institute-of-technology-kharagpur-continuing-education-api-openapi.yml",
+    "indian-institute-of-technology-kharagpur-opensearch-api-openapi.yml"
+  ],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "2 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "indian-institute-of-technology-kharagpur-erp-cep-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "indian-institute-of-technology-kharagpur-idr-opensearch-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: indian-institute-of-technology-kharagpur-open-search-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 5 total)"
+  ],
+  "skipped": [
+    "_original/indian-institute-of-technology-kharagpur-idr-opensearch-openapi_2.yml: archived document superseded by a larger archived document",
+    "_original/indian-institute-of-technology-kharagpur-erp-cep-openapi_2.yml: archived document superseded by a larger archived document",
+    "indian-institute-of-technology-kharagpur-continuing-education-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indian-institute-of-technology-kharagpur-open-search-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

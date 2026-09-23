@@ -1,0 +1,109 @@
+# generated: '2026-09-01'
+# method: derived
+# source: live probes of https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/cepdata on
+#   2026-09-01, using the 200 distinct course_id values linked from https://www.iitkgp.ac.in/ and
+#   an Accept: application/json negotiation test; plus the SSO redirect observed on
+#   /InfoCellDetails/resources/application.wadl.
+# x-operator: institution
+# NOTE: IIT Kharagpur publishes no OpenAPI and no developer documentation for this endpoint. It was
+# found by reading the institute homepage, which links it 200 times. Every path, parameter, status
+# code and content type below was observed in a live response. This is the pristine pre-refine copy.
+openapi: 3.1.0
+info:
+  title: IIT Kharagpur ERP Continuing Education Programme Brochure Endpoint
+  summary: >-
+    Public, unauthenticated document endpoint of the IIT Kharagpur ERP that returns the brochure
+    PDF for a Continuing Education Programme course, keyed by its institutional course_id.
+  description: >-
+    IIT Kharagpur's ERP at erp.iitkgp.ac.in is a JAX-RS application behind the institute's own
+    SSO (Apache Tomcat 8.0.51; requesting /InfoCellDetails/resources/application.wadl 302s to
+    /SSOAdministration/login.htm). One resource namespace is deliberately exposed to the public
+    without authentication — /InfoCellDetails/resources/external/ — and the institute's own
+    homepage links a single operation in it, `cepdata`, two hundred times, once per Continuing
+    Education Programme and Continuing Education Foundation course on offer.
+
+    This is institution-authored software on an institution host, not a vendor platform, and it
+    is the only unauthenticated callable endpoint found anywhere on the IIT Kharagpur estate that
+    the institute itself wrote. It is described here as what it is: a single GET, one required
+    query parameter, a PDF or an empty body.
+
+    Verified live 2026-09-01 against eight course_id values taken from the homepage.
+    CEP/CSC/25-26/AE/2323 returned a 2,250,896-byte PDF; CEP/WRK/25-26/CD/2325 returned 241,965
+    bytes; IIT/CEP/CFC/CFC/2025-2026/HS/144, .../HS/196 and .../MT/107 all returned PDFs.
+    IIT/CEP/CFC/CFC/2025-2026/CS/197, .../CS/209 and .../2026-2027/AI/28 returned HTTP 200 with
+    Content-Type text/plain and a zero-byte body — the endpoint's way of saying "no brochure
+    published for this course". There is no 404 and no error document.
+
+    The course_id values are structured institutional identifiers of the form
+    IIT/CEP/<programme>/<programme>/<academic year>/<department code>/<serial> or the shorter
+    CEP/<type>/<yy-yy>/<department code>/<serial>. The endpoint does not enumerate them; the
+    only published index is the institute homepage.
+  version: '1.0'
+  contact:
+    name: IIT Kharagpur Continuing Education Programme
+    url: https://www.iitkgp.ac.in/
+  license:
+    name: No API terms of use published for this endpoint
+    identifier: NONE
+servers:
+  - url: https://erp.iitkgp.ac.in/InfoCellDetails/resources/external
+    description: >-
+      Unauthenticated `external` resource namespace of the IIT Kharagpur ERP. Sibling namespaces
+      under /InfoCellDetails/resources/ are SSO-gated; /InfoCellDetails/ itself returns 403.
+tags:
+  - name: continuing-education
+    description: >-
+      Continuing Education Programme course documents. One operation, verified live 2026-09-01.
+paths:
+  /cepdata:
+    get:
+      tags: [continuing-education]
+      operationId: getCepBrochure
+      summary: Fetch the brochure for one Continuing Education Programme course
+      description: >-
+        Returns the course brochure as a PDF. No API key, cookie or Referer is required; the
+        JSESSIONID cookie the server sets is not needed on the request. Content negotiation is
+        not supported — sending `Accept: application/json` returns HTTP 406 with a Tomcat error
+        page, which is how the underlying JAX-RS stack was identified.
+      parameters:
+        - name: course_id
+          in: query
+          required: true
+          description: >-
+            Institutional course identifier. Slashes are sent unencoded by the institute's own
+            links and are accepted that way. Omitting the parameter returns HTTP 200 with an
+            empty text/plain body, the same response as an unknown course.
+          schema:
+            type: string
+          examples:
+            longForm:
+              value: IIT/CEP/CFC/CFC/2025-2026/HS/144
+            shortForm:
+              value: CEP/WRK/25-26/CD/2325
+      responses:
+        '200':
+          description: >-
+            Either the brochure PDF (Content-Type application/pdf, chunked) or — for a course
+            with no brochure, an unknown course_id, or no course_id at all — Content-Type
+            text/plain with a zero-length body. The status code does not distinguish the two;
+            the Content-Type does.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                contentMediaType: application/pdf
+                contentEncoding: binary
+            text/plain:
+              schema:
+                type: string
+                description: Always empty. Signals "no document" without a 404.
+                example: ''
+        '406':
+          description: >-
+            Returned when the request asks for a representation the resource cannot produce,
+            e.g. `Accept: application/json`. Body is an Apache Tomcat 8.0.51 HTML error report,
+            not a machine-readable problem document.
+          content:
+            text/html:
+              schema:
+                type: string

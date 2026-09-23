@@ -1,0 +1,80 @@
+generated: '2026-09-01'
+method: probed
+source: >-
+  Live probes 2026-09-01 of http://www.idr.iitkgp.ac.in/xmlui/open-search/discover (200 with no
+  credentials), https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/cepdata (200 with no
+  credentials), https://erp.iitkgp.ac.in/InfoCellDetails/resources/application.wadl (302 to
+  /SSOAdministration/login.htm), https://erp.iitkgp.ac.in/InfoCellDetails/ (403),
+  https://hpc.iitkgp.ac.in/app (login form), and the eduGAIN metadata database
+  (https://technical.edugain.org/api.php?action=list_entities).
+provider: Indian Institute of Technology Kharagpur
+providerId: indian-institute-of-technology-kharagpur
+description: >-
+  Authentication posture across IIT Kharagpur's surfaces. There is no API key issuance, no OAuth
+  authorization server, no OpenID Connect discovery document and no published SAML metadata
+  anywhere on the institute's public estate. The two callable surfaces recorded in this profile
+  are entirely unauthenticated; everything else is behind an institute-built session SSO that is
+  not federated and not documented.
+summary:
+  types: [none, session]
+  institution_operated: [none, session]
+  tenant_operated: []
+  key_issuance: none found
+  federated_identity: none found
+schemes:
+  - name: idr-opensearch-anonymous
+    type: none
+    x-operator: institution
+    surface: IIT Kharagpur Institutional Digital Repository OpenSearch interface
+    baseURL: http://www.idr.iitkgp.ac.in/xmlui/open-search/discover
+    description: >-
+      No authentication of any kind. Verified 2026-09-01 with a bare GET carrying no cookie, no
+      Authorization header and no Referer — HTTP 200 with a full result feed. DSpace's /login
+      path exists for depositors but is irrelevant to reading. The transport is plain HTTP: the
+      host has no TLS listener, so any credential sent to it would travel in the clear. Nothing
+      about the read surface requires one.
+  - name: erp-external-anonymous
+    type: none
+    x-operator: institution
+    surface: IIT Kharagpur ERP Continuing Education Programme brochure endpoint
+    baseURL: https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/cepdata
+    description: >-
+      No authentication. The ERP sets a JSESSIONID cookie on the response but does not require
+      one on the request; a first-contact GET with no cookie returns the PDF. This is the intent
+      of the `external` path segment — the namespace exists so that the public institute website
+      can link course brochures out of a system that is otherwise gated.
+  - name: erp-sso-session
+    type: session
+    x-operator: institution
+    surface: IIT Kharagpur ERP (everything outside /resources/external)
+    loginURL: https://erp.iitkgp.ac.in/SSOAdministration/login.htm
+    description: >-
+      Institute-built form/session SSO in front of the whole ERP. Requesting
+      /InfoCellDetails/resources/application.wadl 302s to
+      /SSOAdministration/login.htm?sessionToken=...&requestedUrl=..., i.e. the JAX-RS application
+      does publish a WADL but it is only reachable to an authenticated session, so no machine
+      contract can be read from outside. /SSOAdministration/auth.htm returns 405 to a GET
+      (it expects POST). There is no OIDC discovery document, no token endpoint and no
+      client-registration path: this is a private session cookie system, not an authorization
+      server, and nothing on it is available to a third-party developer.
+  - name: hpc-app-session
+    type: session
+    x-operator: institution
+    surface: HPC ERP System (PARAM Shakti allocation and job accounting)
+    loginURL: https://hpc.iitkgp.ac.in/app
+    description: >-
+      Separate session login guarding the HPC facility's allocation/accounting application.
+      /robots.txt on the same host explicitly disallows /app/, /service/, /data/ and
+      /HPC-Admin-User-Manual. No API, no token endpoint and no documentation are exposed.
+notes:
+  - >-
+    No Shibboleth or SAML identity provider for iitkgp.ac.in exists in the eduGAIN metadata
+    database. India's national federation INFED (registration authority http://inflibnet.ac.in,
+    an eduGAIN member since 2017) publishes 379 entities and none of them carries an iitkgp.ac.in
+    entityID or a Kharagpur display name — checked against the full 10,616-entity eduGAIN export
+    on 2026-09-01. Peer IITs are present (e.g. https://identity.iith.ac.in/idp/shibboleth for
+    IIT Hyderabad), so the absence is a real gap rather than a national one.
+  - >-
+    No .well-known directory of any kind was found. https://www.iitkgp.ac.in/.well-known/security.txt
+    returns HTTP 200 but serves the site's Angular shell (47,510 bytes, byte-identical to the
+    homepage response) — a soft 404, not a security.txt. It is recorded as absent.

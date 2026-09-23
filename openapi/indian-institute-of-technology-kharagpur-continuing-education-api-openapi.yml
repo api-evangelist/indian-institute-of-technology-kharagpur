@@ -1,0 +1,58 @@
+openapi: 3.2.0
+info:
+  title: IIT Kharagpur ERP Programme Brochure Endpoint Continuing…
+  summary: Public, unauthenticated document endpoint of the IIT Kharagpur ERP that returns the brochure PDF for a Continuing Education Programme course, keyed by its institutional course_id.
+  description: IIT Kharagpur's ERP at erp.iitkgp.ac.in is a JAX-RS application behind the institute's own SSO (Apache Tomcat 8.0.51; requesting /InfoCellDetails/resources/application.wadl 302s to /SSOAdministration/login.htm).
+  version: '1.0'
+  contact:
+    name: IIT Kharagpur Continuing Education Programme
+    url: https://www.iitkgp.ac.in/
+  license:
+    name: No API terms of use published for this endpoint
+    identifier: NONE
+servers:
+- url: https://erp.iitkgp.ac.in/InfoCellDetails/resources/external
+  description: Unauthenticated `external` resource namespace of the IIT Kharagpur ERP. Sibling namespaces under /InfoCellDetails/resources/ are SSO-gated; /InfoCellDetails/ itself returns 403.
+tags:
+- name: Continuing Education
+  description: Continuing Education Programme course documents. One operation, verified live 2026-09-01.
+paths:
+  /cepdata:
+    get:
+      tags:
+      - Continuing Education
+      operationId: getCepBrochure
+      summary: Fetch the brochure for one Continuing Education Programme course
+      description: 'Returns the course brochure as a PDF. No API key, cookie or Referer is required; the JSESSIONID cookie the server sets is not needed on the request. Content negotiation is not supported — sending `Accept: application/json` returns HTTP 406 with a Tomcat error page, which is how the underlying JAX-RS stack was identified.'
+      parameters:
+      - name: course_id
+        in: query
+        required: true
+        description: Institutional course identifier. Slashes are sent unencoded by the institute's own links and are accepted that way. Omitting the parameter returns HTTP 200 with an empty text/plain body, the same response as an unknown course.
+        schema:
+          type: string
+        examples:
+          longForm:
+            value: IIT/CEP/CFC/CFC/2025-2026/HS/144
+          shortForm:
+            value: CEP/WRK/25-26/CD/2325
+      responses:
+        '200':
+          description: Either the brochure PDF (Content-Type application/pdf, chunked) or — for a course with no brochure, an unknown course_id, or no course_id at all — Content-Type text/plain with a zero-length body. The status code does not distinguish the two; the Content-Type does.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                contentMediaType: application/pdf
+                contentEncoding: binary
+            text/plain:
+              schema:
+                type: string
+                description: Always empty. Signals "no document" without a 404.
+                example: ''
+        '406':
+          description: 'Returned when the request asks for a representation the resource cannot produce, e.g. `Accept: application/json`. Body is an Apache Tomcat 8.0.51 HTML error report, not a machine-readable problem document.'
+          content:
+            text/html:
+              schema:
+                type: string

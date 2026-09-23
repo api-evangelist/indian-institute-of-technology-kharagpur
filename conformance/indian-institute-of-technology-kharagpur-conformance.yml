@@ -1,0 +1,145 @@
+generated: '2026-09-01'
+method: probed
+source: >-
+  Live probes of IIT Kharagpur hosts on 2026-09-01, plus the eduGAIN entity database
+  (https://technical.edugain.org/api.php?action=list_entities, 10,616 entities), the DataCite REST
+  API, the Crossref REST API and the ROR REST API.
+docs: http://www.idr.iitkgp.ac.in/xmlui/
+provider: Indian Institute of Technology Kharagpur
+providerId: indian-institute-of-technology-kharagpur
+note: >-
+  Conformance against the Kin Score `education` regime standards[]. Every entry was reached by
+  fetching the named URL and reading the response body — none is a prose claim from an institute
+  web page. Standards the institution does not publicly expose are recorded as conforms:false with
+  the negative probe that established it, and are never inferred from the presence of a vendor
+  product. The IRINS research-profile portal is an INFLIBNET tenant deployment and is deliberately
+  NOT used as conformance evidence for IIT Kharagpur, even where INFLIBNET's platform documentation
+  claims ORCID, Scopus and Crossref ingestion: that claim is INFLIBNET's, unverifiable from outside
+  a Cloudflare interstitial, and it would credit this institution for a vendor's engineering.
+standards:
+  - id: oai-pmh
+    conforms: false
+    operator: none
+    evidence: >-
+      No OAI-PMH provider is deployed. The DSpace 6.0 repository at www.idr.iitkgp.ac.in serves
+      only /xmlui through its nginx front end; every conventional OAI base URL returns 404 —
+      /oai/request?verb=Identify, /dspace-oai/request?verb=Identify, /server/oai/request?verb=Identify
+      and /OAI/request?verb=Identify all return the nginx 404 (564 bytes), while
+      /xmlui/OAI/request?verb=Identify and /xmlui/oai/request?verb=Identify return the DSpace
+      XMLUI 404 page (38,201 bytes). /rest/status, /rest/communities, /sword/servicedocument,
+      /rdf/handle/123456789/1 and /jspui/ are equally absent. This is the single largest missing
+      standard for this institution: it is the one every other IIT-class repository exposes, and
+      without it the repository cannot be harvested by OpenAIRE, BASE, CORE or Shodhganga.
+  - id: shibboleth
+    conforms: false
+    operator: none
+    evidence: >-
+      No Shibboleth identity provider for iitkgp.ac.in is published in any federation. The full
+      eduGAIN entity export (10,616 entities, fetched 2026-09-01) contains no entityID, display
+      name or description matching iitkgp, Kharagpur or KGP. India's national federation INFED
+      (registration authority http://inflibnet.ac.in, eduGAIN member since 2017-02-20, production
+      since 2017-03-02) contributes 379 entities to that export and IIT Kharagpur is not among
+      them, though peer institutions are — https://identity.iith.ac.in/idp/shibboleth
+      (IIT Hyderabad), https://eresources.puchd.ac.in/idp/shibboleth (Panjab University) and
+      https://cenlib.gtu.ac.in/idp/shibboleth (Gujarat Technological University). DNS confirms the
+      absence locally: idp., sso., shibboleth. and parichay.iitkgp.ac.in do not resolve.
+  - id: saml
+    conforms: false
+    operator: none
+    evidence: >-
+      No SAML metadata of any kind was found. The institute's single sign-on is a bespoke
+      form/session system at https://erp.iitkgp.ac.in/SSOAdministration/login.htm (auth.htm
+      returns 405 to a GET, expecting POST) with no SAML endpoint, no metadata document and no
+      federation registration. See the shibboleth entry for the federation-side evidence.
+  - id: orcid
+    conforms: false
+    operator: none
+    evidence: >-
+      No institution-operated ORCID integration is publicly evidenceable. The DSpace 6.0
+      repository exposes no ORCID field in its OpenSearch output and has no REST config endpoint
+      to interrogate. The IRINS profile portal at iitkgp.irins.org is claimed by INFLIBNET to
+      ingest ORCID, but it returns HTTP 403 behind a Cloudflare challenge to every automated
+      client and is in any case a tenant surface — INFLIBNET's contract, not IIT Kharagpur's.
+      Recorded as not conforming rather than credited on a vendor's claim.
+  - id: datacite
+    conforms: false
+    operator: none
+    evidence: >-
+      Not a DataCite member and no DOI prefix. https://api.datacite.org/providers?query=Kharagpur
+      returns meta.total 0 and https://api.datacite.org/clients?query=Kharagpur returns meta.total 0
+      (both probed 2026-09-01). The repository mints no DOIs: its handle prefix is the DSpace
+      installation default 123456789, i.e. no Handle prefix is registered either, so repository
+      items have no persistent identifier at all.
+  - id: crossref
+    conforms: false
+    operator: none
+    evidence: >-
+      Not a Crossref member. https://api.crossref.org/members?query=Kharagpur returns
+      total-results 0 (probed 2026-09-01).
+  - id: scim
+    conforms: false
+    operator: none
+    evidence: No SCIM endpoint, no /scim/v2 path and no identity-provisioning surface found on any iitkgp.ac.in host.
+  - id: lti
+    conforms: false
+    operator: none
+    evidence: >-
+      No LTI tool or platform registration surface found. No institution-wide LMS is exposed
+      publicly; nptel.iitkgp.ac.in is a course-content site with no LTI endpoint.
+  - id: oneroster
+    conforms: false
+    operator: none
+    evidence: No OneRoster endpoint found. Student and enrolment data sit entirely behind the ERP SSO.
+  - id: ed-fi
+    conforms: false
+    operator: none
+    evidence: No Ed-Fi surface found; Ed-Fi is a US K-12 standard and is not expected in this jurisdiction.
+  - id: caliper
+    conforms: false
+    operator: none
+    evidence: No Caliper analytics endpoint found.
+  - id: qti
+    conforms: false
+    operator: none
+    evidence: No QTI assessment surface found.
+non_regime_standards:
+  - id: opensearch-1.1
+    conforms: true
+    operator: institution
+    evidence: >-
+      The repository serves a valid OpenSearch 1.1 description document at
+      http://www.idr.iitkgp.ac.in/xmlui/open-search/description.xml (HTTP 200, 603 bytes,
+      xmlns http://a9.com/-/spec/opensearch/1.1/), declaring LongName "Central Library IIT
+      Kharagpur" and Contact dspace-help@library.iitkgp.ac.in. Query responses from
+      /xmlui/open-search/discover carry the opensearch: namespace with totalResults, itemsPerPage,
+      startIndex and Query elements, verified across seven parameter combinations. Caveat: the
+      description document declares no <Url> template, so the query endpoint is not discoverable
+      from the description alone.
+  - id: atom-1.0
+    conforms: true
+    operator: institution
+    evidence: >-
+      Search results are served as Atom 1.0 (xmlns http://www.w3.org/2005/Atom, Content-Type
+      application/atom+xml;charset=utf-8) with feed-level title, subtitle, id, updated and
+      per-item entry/title/author/link/id/published/updated/summary. Site-level feeds also exist
+      at /xmlui/feed/atom_1.0/site, /xmlui/feed/rss_1.0/site and /xmlui/feed/rss_2.0/site (200).
+      Caveat: every <id> and <link> is emitted with the authority http://127.0.0.1 because
+      dspace.baseUrl is misconfigured, so the feed is well-formed but its identifiers do not
+      dereference.
+  - id: dublin-core
+    conforms: true
+    operator: institution
+    evidence: >-
+      Repository metadata is Dublin Core. The feed declares xmlns:dc="http://purl.org/dc/elements/1.1/"
+      and emits dc:date per entry; browse indexes are exposed by dc.contributor.author,
+      dc.date.issued, dc.subject and dc.title (/xmlui/browse?type=author|dateissued|subject|title),
+      and the Solr sort field dc.date.issued_dt was verified as accepted by the search endpoint.
+  - id: ror
+    conforms: true
+    operator: registry
+    evidence: >-
+      Registered in the Research Organization Registry as https://ror.org/03w5sq511, "Indian
+      Institute of Technology Kharagpur" (aliases IIT KGP, IIT Kharagpur), linked to
+      http://www.iitkgp.ac.in/. Retrieved from https://api.ror.org/v2/organizations?query=... on
+      2026-09-01. This is a registry membership — a fact about the institution — not a contract
+      it operates, and ROR is not in the education regime standards[] list.

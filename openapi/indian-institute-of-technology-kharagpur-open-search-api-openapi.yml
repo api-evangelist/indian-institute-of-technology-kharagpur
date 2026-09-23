@@ -1,0 +1,175 @@
+openapi: 3.2.0
+info:
+  title: IIT Kharagpur Institutional Digital Repository Interface…
+  summary: Institution-hosted OpenSearch 1.1 query interface over the IIT Kharagpur Central Library Institutional Digital Repository (DSpace 6.0).
+  description: The Institutional Digital Repository (IDR) of the Central Library, IIT Kharagpur runs DSpace 6.0 on the institute's own host www.idr.iitkgp.ac.in and was the first institutional repository among the IITs.
+  version: '1.1'
+  contact:
+    name: IIT Kharagpur Central Library — DSpace administrator
+    email: dspace-help@library.iitkgp.ac.in
+    url: http://www.idr.iitkgp.ac.in/xmlui/
+  license:
+    name: No metadata reuse policy declared by the repository
+    identifier: NONE
+servers:
+- url: http://www.idr.iitkgp.ac.in/xmlui
+  description: IIT Kharagpur Institutional Digital Repository (DSpace 6.0) — institution-operated, unauthenticated, HTTP only (no TLS listener on this host).
+tags:
+- name: Open Search
+  description: OpenSearch 1.1 description and query operations. All parameters verified live 2026-09-01.
+paths:
+  /open-search/description.xml:
+    get:
+      tags:
+      - Open Search
+      operationId: getOpenSearchDescription
+      summary: Retrieve the OpenSearch 1.1 description document
+      description: Returns the repository's OpenSearch description document (603 bytes, verified 2026-09-01). It carries ShortName, LongName "Central Library IIT Kharagpur", Description, InputEncoding, OutputEncoding, an example Query with searchTerms "photosynthesis", Tags "IR DSpace", Contact dspace-help@library.iitkgp.ac.in and an Image element. It does NOT declare a template, so the query endpoint below has to be discovered rather than read off the description.
+      responses:
+        '200':
+          description: OpenSearch description document.
+          content:
+            application/xml:
+              schema:
+                type: string
+                contentMediaType: application/opensearchdescription+xml
+  /open-search/discover:
+    get:
+      tags:
+      - Open Search
+      operationId: discover
+      summary: Search the institutional repository
+      description: 'Free-text search across the repository index. Responses are always a syndication feed; `format` selects the flavour. Observed behaviour: format=atom returns application/atom+xml; format=rss, format=html, format=json and an omitted format all return text/xml carrying the same Atom document, i.e. unsupported format values fall back silently rather than erroring. A request with no `query` returns HTTP 200 and an empty feed, not a 4xx.'
+      parameters:
+      - name: query
+        in: query
+        required: false
+        description: Search terms. `*` matches everything (8,162 items on 2026-09-01). Omitting it returns an empty feed with HTTP 200.
+        schema:
+          type: string
+        example: rice
+      - name: format
+        in: query
+        required: false
+        description: Response flavour. Only `atom` changes the Content-Type (to application/atom+xml); every other value, including unsupported ones, yields text/xml with the same body.
+        schema:
+          type: string
+          enum:
+          - atom
+          - rss
+          - html
+          default: rss
+      - name: start
+        in: query
+        required: false
+        description: 1-based offset of the first result; echoed back as opensearch:startIndex.
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: rpp
+        in: query
+        required: false
+        description: Results per page; echoed back as opensearch:itemsPerPage. Default 20 when omitted.
+        schema:
+          type: integer
+          minimum: 1
+          default: 20
+        example: 3
+      - name: sort_by
+        in: query
+        required: false
+        description: Solr sort field. Verified live with dc.date.issued_dt; DSpace 6 also indexes score and dc.title_sort.
+        schema:
+          type: string
+        example: dc.date.issued_dt
+      - name: order
+        in: query
+        required: false
+        description: Sort direction, used with sort_by.
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+      - name: scope
+        in: query
+        required: false
+        description: Restrict the search to one community or collection by handle. Verified live — scope=123456789/1 narrowed the "rice" result set from 854 to 852.
+        schema:
+          type: string
+        example: 123456789/1
+      responses:
+        '200':
+          description: Syndication feed of matching items. Returned for every request observed, including a request with no parameters at all.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/OpenSearchFeed'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OpenSearchFeed'
+components:
+  schemas:
+    Item:
+      type: object
+      description: One repository item, as emitted in an <entry> element.
+      properties:
+        title:
+          type: string
+          example: Development and Study of a Pneumatic Rice Polishing System
+        author:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Chodisetti, Someswararao
+        id:
+          type: string
+          description: Item identity. Emitted as http://127.0.0.1/xmlui/handle/123456789/NNNN — a localhost URL, not dereferenceable. The dereferenceable form is http://www.idr.iitkgp.ac.in/xmlui/handle/123456789/NNNN.
+          example: http://127.0.0.1/xmlui/handle/123456789/8724
+        link:
+          type: string
+          description: Alternate link, carrying the same misconfigured authority as id.
+        published:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        summary:
+          type: string
+        dc:date:
+          type: string
+          format: date-time
+    OpenSearchFeed:
+      type: object
+      description: Atom 1.0 feed in the http://www.w3.org/2005/Atom namespace, extended with http://a9.com/-/spec/opensearch/1.1/ and http://purl.org/dc/elements/1.1/. Shape taken from a live response, not from the OpenSearch schema.
+      properties:
+        title:
+          type: string
+          description: Always "Central Library IIT Kharagpur".
+          example: Central Library IIT Kharagpur
+        subtitle:
+          type: string
+          description: The stock DSpace subtitle string.
+        id:
+          type: string
+          description: Feed identity. Emitted as http://127.0.0.1/xmlui because dspace.baseUrl is misconfigured on this deployment.
+          example: http://127.0.0.1/xmlui
+        updated:
+          type: string
+          format: date-time
+        opensearch:totalResults:
+          type: integer
+          example: 854
+        opensearch:itemsPerPage:
+          type: integer
+          example: 2
+        opensearch:startIndex:
+          type: integer
+          example: 1
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'

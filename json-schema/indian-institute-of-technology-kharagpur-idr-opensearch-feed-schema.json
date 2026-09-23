@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/indian-institute-of-technology-kharagpur/main/json-schema/indian-institute-of-technology-kharagpur-idr-opensearch-feed-schema.json",
+  "title": "IIT Kharagpur IDR OpenSearch Result Feed",
+  "description": "JSON Schema for the JSON projection of one OpenSearch result feed returned by the IIT Kharagpur Institutional Digital Repository at http://www.idr.iitkgp.ac.in/xmlui/open-search/discover. The endpoint itself serves Atom XML, not JSON — this schema describes the shape a consumer gets after mapping that Atom document, and it exists so the field set, cardinality and the localhost-identifier defect are machine-readable. Derived from a live 2026-09-01 response (query=rice, format=atom, rpp=2), not from DSpace documentation.",
+  "x-provenance": {
+    "generated": "2026-09-01",
+    "method": "derived",
+    "source": "http://www.idr.iitkgp.ac.in/xmlui/open-search/discover?query=rice&format=atom&rpp=2",
+    "status": 200,
+    "x-operator": "institution"
+  },
+  "type": "object",
+  "required": ["title", "totalResults", "itemsPerPage", "startIndex", "entries"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Feed title. Constant across every observed response.",
+      "const": "Central Library IIT Kharagpur"
+    },
+    "subtitle": { "type": "string", "description": "Stock DSpace subtitle string." },
+    "id": {
+      "type": "string",
+      "description": "Feed identity. Observed as http://127.0.0.1/xmlui because dspace.baseUrl is misconfigured on this deployment.",
+      "examples": ["http://127.0.0.1/xmlui"]
+    },
+    "updated": { "type": "string", "format": "date-time" },
+    "totalResults": { "type": "integer", "minimum": 0, "description": "opensearch:totalResults. 8162 for query=*, 854 for query=rice, 696 for query=machine learning on 2026-09-01." },
+    "itemsPerPage": { "type": "integer", "minimum": 1, "default": 20, "description": "opensearch:itemsPerPage; echoes the rpp parameter." },
+    "startIndex": { "type": "integer", "minimum": 1, "description": "opensearch:startIndex; echoes the start parameter. 1-based." },
+    "query": {
+      "type": "object",
+      "description": "opensearch:Query role=request.",
+      "properties": {
+        "searchTerms": { "type": "string" },
+        "startPage": { "type": "integer" }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "description": "Repository items. Empty array when no query is supplied — the endpoint returns 200 with an empty feed rather than a 4xx.",
+      "items": { "$ref": "#/$defs/Item" }
+    }
+  },
+  "$defs": {
+    "Item": {
+      "type": "object",
+      "description": "One repository item as emitted in an Atom <entry>. Only these fields were observed; DSpace 6 OpenSearch does not emit subject, type, format or rights.",
+      "required": ["title", "id"],
+      "properties": {
+        "title": { "type": "string", "examples": ["Development and Study of a Pneumatic Rice Polishing System"] },
+        "authors": {
+          "type": "array",
+          "description": "Atom <author><name>. Family-name-first, comma separated, exactly as stored in dc.contributor.author.",
+          "items": { "type": "string", "examples": ["Chodisetti, Someswararao"] }
+        },
+        "id": {
+          "type": "string",
+          "description": "Item identity. DEFECT: emitted as http://127.0.0.1/xmlui/handle/123456789/{n}. Rewrite the authority to http://www.idr.iitkgp.ac.in before use. The prefix 123456789 is the DSpace installation default, so this is not a registered Handle and the item has no persistent identifier.",
+          "examples": ["http://127.0.0.1/xmlui/handle/123456789/8724"]
+        },
+        "link": { "type": "string", "description": "Alternate link, carrying the same misconfigured authority as id." },
+        "published": { "type": "string", "format": "date-time", "description": "Maps to dc.date.issued." },
+        "updated": { "type": "string", "format": "date-time", "description": "Repository ingest/modification datestamp, not the publication date." },
+        "summary": { "type": "string", "description": "Plain-text concatenation of title and author, not an abstract. DSpace 6 OpenSearch does not emit dc.description.abstract here." },
+        "date": { "type": "string", "format": "date-time", "description": "dc:date, duplicating published." }
+      }
+    }
+  }
+}

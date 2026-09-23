@@ -1,0 +1,79 @@
+generated: '2026-09-01'
+method: probed
+source: >-
+  Error and failure behaviour provoked and observed across iitkgp.ac.in hosts on 2026-09-01.
+provider: Indian Institute of Technology Kharagpur
+providerId: indian-institute-of-technology-kharagpur
+x-operator: institution
+description: >-
+  IIT Kharagpur publishes no error reference for any surface. Everything below was provoked and
+  observed. Three of the four entries are cases where a successful HTTP status is returned for a
+  request that did not succeed, which is the failure mode that matters most to an automated
+  client.
+errors:
+  - surface: IIT Kharagpur ERP Continuing Education Programme brochure endpoint
+    transport_status: 200
+    x-operator: institution
+    note: >-
+      An unknown course_id, a course with no published brochure, and a request with no course_id
+      at all all return HTTP 200 with Content-Type text/plain and a zero-byte body. There is no
+      404 and no error document. A client must branch on Content-Type (application/pdf vs
+      text/plain) or on Content-Length, never on the status code.
+    observed_at:
+      - https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/cepdata?course_id=IIT/CEP/CFC/CFC/2026-2027/AI/28
+      - https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/cepdata
+  - surface: IIT Kharagpur ERP Continuing Education Programme brochure endpoint
+    transport_status: 406
+    x-operator: institution
+    note: >-
+      Sending Accept: application/json returns HTTP 406 with an Apache Tomcat 8.0.51 HTML error
+      report, not a machine-readable problem document. This is the only genuine error status the
+      endpoint was observed to emit.
+    observed_at:
+      - https://erp.iitkgp.ac.in/InfoCellDetails/resources/external/cepdata?course_id=IIT/CEP/CFC/CFC/2026-2027/AI/28
+  - surface: IIT Kharagpur Institutional Digital Repository OpenSearch interface
+    transport_status: 200
+    x-operator: institution
+    note: >-
+      A request with no `query` returns HTTP 200 and an empty Atom feed rather than a 4xx.
+      Unsupported `format` values (json, html, or any other string) also return 200 and fall back
+      silently to the default text/xml Atom document, so a client cannot detect that its requested
+      representation was not honoured except by reading the Content-Type.
+    observed_at:
+      - http://www.idr.iitkgp.ac.in/xmlui/open-search/discover?format=atom
+      - http://www.idr.iitkgp.ac.in/xmlui/open-search/discover?query=rice&format=json
+  - surface: IIT Kharagpur institute website
+    transport_status: 200
+    x-operator: institution
+    note: >-
+      www.iitkgp.ac.in is an Angular single-page application that serves the same 47,510-byte
+      shell for every unrouted path with HTTP 200. /llms.txt, /.well-known/security.txt,
+      /sitemap.xml, /privacy-policy and /terms-of-use all return 200 with that shell — soft 404s
+      in every case. Any crawler treating status 200 as "the resource exists" will record five
+      artifacts this institute does not publish. Real pages (/tenders 51,928 bytes,
+      /iitkgp-announcements 51,496 bytes, /right-to-information 88,696 bytes) are distinguishable
+      only by body length.
+    observed_at:
+      - https://www.iitkgp.ac.in/llms.txt
+      - https://www.iitkgp.ac.in/.well-known/security.txt
+      - https://www.iitkgp.ac.in/sitemap.xml
+  - surface: IRINS research information portal (tenant)
+    transport_status: 403
+    x-operator: tenant
+    note: >-
+      iitkgp.irins.org and the whole irins.org platform sit behind a Cloudflare interstitial that
+      returns HTTP 403 with a "Just a moment..." challenge document to every non-browser client,
+      including one sending a full Chrome header set. This is a live host refusing automation,
+      not a dead one. No machine-readable surface behind it could be assessed.
+    observed_at:
+      - https://iitkgp.irins.org/
+      - https://irins.org/
+  - surface: PARAM Shakti supercomputing portal
+    transport_status: 403
+    x-operator: institution
+    note: >-
+      https://paramshakti.iitkgp.ac.in/ returns a bare Apache 403 Forbidden at the root while
+      https://paramshakti.iitkgp.ac.in/support/ returns 200. The root is deliberately closed, not
+      broken.
+    observed_at:
+      - https://paramshakti.iitkgp.ac.in/
