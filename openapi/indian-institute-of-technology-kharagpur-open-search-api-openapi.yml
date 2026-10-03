@@ -111,37 +111,6 @@ paths:
                 $ref: '#/components/schemas/OpenSearchFeed'
 components:
   schemas:
-    OpenSearchFeed:
-      type: object
-      description: Atom 1.0 feed in the http://www.w3.org/2005/Atom namespace, extended with http://a9.com/-/spec/opensearch/1.1/ and http://purl.org/dc/elements/1.1/. Shape taken from a live response, not from the OpenSearch schema.
-      properties:
-        title:
-          type: string
-          description: Always "Central Library IIT Kharagpur".
-          example: Central Library IIT Kharagpur
-        subtitle:
-          type: string
-          description: The stock DSpace subtitle string.
-        id:
-          type: string
-          description: Feed identity. Emitted as http://127.0.0.1/xmlui because dspace.baseUrl is misconfigured on this deployment.
-          example: http://127.0.0.1/xmlui
-        updated:
-          type: string
-          format: date-time
-        opensearch:totalResults:
-          type: integer
-          example: 854
-        opensearch:itemsPerPage:
-          type: integer
-          example: 2
-        opensearch:startIndex:
-          type: integer
-          example: 1
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
     Item:
       type: object
       description: One repository item, as emitted in an <entry> element.
@@ -173,3 +142,34 @@ components:
         dc:date:
           type: string
           format: date-time
+    OpenSearchFeed:
+      type: object
+      description: Atom 1.0 feed in the http://www.w3.org/2005/Atom namespace, extended with http://a9.com/-/spec/opensearch/1.1/ and http://purl.org/dc/elements/1.1/. Shape taken from a live response, not from the OpenSearch schema.
+      properties:
+        title:
+          type: string
+          description: Always "Central Library IIT Kharagpur".
+          example: Central Library IIT Kharagpur
+        subtitle:
+          type: string
+          description: The stock DSpace subtitle string.
+        id:
+          type: string
+          description: Feed identity. Emitted as http://127.0.0.1/xmlui because dspace.baseUrl is misconfigured on this deployment.
+          example: http://127.0.0.1/xmlui
+        updated:
+          type: string
+          format: date-time
+        opensearch:totalResults:
+          type: integer
+          example: 854
+        opensearch:itemsPerPage:
+          type: integer
+          example: 2
+        opensearch:startIndex:
+          type: integer
+          example: 1
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
