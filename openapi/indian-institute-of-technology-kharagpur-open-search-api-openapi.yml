@@ -111,37 +111,6 @@ paths:
                 $ref: '#/components/schemas/OpenSearchFeed'
 components:
   schemas:
-    Item:
-      type: object
-      description: One repository item, as emitted in an <entry> element.
-      properties:
-        title:
-          type: string
-          example: Development and Study of a Pneumatic Rice Polishing System
-        author:
-          type: object
-          properties:
-            name:
-              type: string
-              example: Chodisetti, Someswararao
-        id:
-          type: string
-          description: Item identity. Emitted as http://127.0.0.1/xmlui/handle/123456789/NNNN — a localhost URL, not dereferenceable. The dereferenceable form is http://www.idr.iitkgp.ac.in/xmlui/handle/123456789/NNNN.
-          example: http://127.0.0.1/xmlui/handle/123456789/8724
-        link:
-          type: string
-          description: Alternate link, carrying the same misconfigured authority as id.
-        published:
-          type: string
-          format: date-time
-        updated:
-          type: string
-          format: date-time
-        summary:
-          type: string
-        dc:date:
-          type: string
-          format: date-time
     OpenSearchFeed:
       type: object
       description: Atom 1.0 feed in the http://www.w3.org/2005/Atom namespace, extended with http://a9.com/-/spec/opensearch/1.1/ and http://purl.org/dc/elements/1.1/. Shape taken from a live response, not from the OpenSearch schema.
@@ -173,3 +142,34 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Item'
+    Item:
+      type: object
+      description: One repository item, as emitted in an <entry> element.
+      properties:
+        title:
+          type: string
+          example: Development and Study of a Pneumatic Rice Polishing System
+        author:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Chodisetti, Someswararao
+        id:
+          type: string
+          description: Item identity. Emitted as http://127.0.0.1/xmlui/handle/123456789/NNNN — a localhost URL, not dereferenceable. The dereferenceable form is http://www.idr.iitkgp.ac.in/xmlui/handle/123456789/NNNN.
+          example: http://127.0.0.1/xmlui/handle/123456789/8724
+        link:
+          type: string
+          description: Alternate link, carrying the same misconfigured authority as id.
+        published:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        summary:
+          type: string
+        dc:date:
+          type: string
+          format: date-time
