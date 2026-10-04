@@ -7,10 +7,10 @@
       "title": "IIT Kharagpur News",
       "saved": 0,
       "method": "none",
-      "error": "parse_failed"
+      "error": "fetch_failed: URLError"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-09-19T19:51:11Z",
+  "fetched": "2026-10-03T12:15:37Z",
   "note": "feed fetch failed (ECONNRESET)"
 }
