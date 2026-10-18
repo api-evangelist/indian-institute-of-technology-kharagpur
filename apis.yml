@@ -191,6 +191,8 @@ apis:
   humanURL: https://iitkgp.irins.org/
   baseURL: http://www.idr.iitkgp.ac.in/xmlui/open-search/discover
   tags:
+  - OpenSearch
+  tags_raw:
   - Open Search
   properties:
   - type: OpenAPI
