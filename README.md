@@ -1,4 +1,4 @@
-# Indian Institute of Technology Kharagpur (indian-institute-of-technology-kharagpur)
+# Indian Institute of Technology Kharagpur
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,60 +64,127 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Indian Institute of Technology Kharagpur (IIT KGP) is a public technical and research university in West Bengal, India — the first of the IITs — ranked #222 in the QS World University Rankings 2025. This repository catalogs its publicly reachable, standards-based API and data footprint as an [APIs.json](https://apievangelist.com/) provider profile. IIT Kharagpur does not operate a formal institution-wide developer portal; the entries below are the public, standards-based endpoints that could be confirmed.
+Indian Institute of Technology Kharagpur (IIT KGP) is an Institute of National Importance in West Bengal, India — the first of the IITs, founded 1951, and ranked #222 in the QS World University Rankings 2025. It runs no developer portal, publishes no OpenAPI and issues no API keys, and this profile does not pretend otherwise. What it does operate, on its own iitkgp.ac.in hosts, are two unauthenticated machine surfaces found by probing rather than by documentation. The Central Library's Institutional Digital Repository (DSpace 6.0, 8,162 items, the first IR among the IITs) exposes an OpenSearch 1.1 description document and an Atom query endpoint at www.idr.iitkgp.ac.in/xmlui — served over plain HTTP only, with every identifier in the feed emitted as http://127.0.0.1/xmlui because dspace.baseUrl is misconfigured, and with no OAI-PMH provider, no DSpace REST API and no registered Handle prefix. The institute's own ERP exposes a single public JAX-RS resource, /InfoCellDetails/resources/external/cepdata, which returns the brochure PDF for any Continuing Education Programme course by structured course_id; the institute homepage links it two hundred times, and it is the only endpoint on the estate that IIT Kharagpur itself wrote and left open. Everything else is gated or leased: the ERP behind a bespoke session SSO whose JAX-RS WADL 302s to a login page, the PARAM Shakti HPC allocation system behind its own login, the IRINS research-profile portal a tenant deployment on INFLIBNET's Cloudflare-fronted platform, and the alumni network a tenant on AlmaConnect. No Shibboleth or SAML identity provider for iitkgp.ac.in exists anywhere in eduGAIN, including in India's own INFED federation where peer IITs are registered; the institute is not a DataCite or Crossref member and mints no DOIs. Its one verifiable registry membership is ROR 03w5sq511. The institute website itself returns HTTP 200 with an Angular shell for /llms.txt, /.well-known/security.txt and /sitemap.xml alike, so none of those exist either.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/indian-institute-of-technology-kharagpur/refs/heads/main/apis.yml
-- Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=indian-institute-of-technology-kharagpur-api-evangelist&utm_content=repo
+**Areas:** Education · Higher Education · University · Institute of Technology · India · Research · Research Repository · Institutional Repository · DSpace · OpenSearch · Course Catalog · Research Computing
 
-## Type
+## Indian Institute of Technology Kharagpur on APIs.io
 
-- Type: Index
-- Position: Consumer
-- Access: 3rd-Party
+Everything profiled for Indian Institute of Technology Kharagpur is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/indian-institute-of-technology-kharagpur/](https://apis.io/providers/indian-institute-of-technology-kharagpur/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (5)
 
-Education, Higher Education, University, Research, Library, Institutional Repository, DSpace, India
+- [IIT Kharagpur IRINS Research Profile Portal (INFLIBNET tenant)](https://apis.io/apis/indian-institute-of-technology-kharagpur/irins/) — Indian Research Information Network System (IRINS) research-profile portal for IIT Kharagpur, operated by INFLIBNET — an autonomous inter-university centre…
+- [IIT Kharagpur Alumni Network (AlmaConnect tenant)](https://apis.io/apis/indian-institute-of-technology-kharagpur/alumni-network/) — The alumni network at alumni.iitkgp.ac.in is an AlmaConnect deployment. The hostname is the institute's but the DNS record is a CNAME to…
+- [Research Organization Registry membership](https://apis.io/apis/indian-institute-of-technology-kharagpur/ror/) — IIT Kharagpur is registered in ROR as https://ror.org/03w5sq511, "Indian Institute of Technology Kharagpur" (aliases IIT KGP, IIT Kharagpur), linked to…
+- [Indian Institute of Technology Kharagpur Continuing Education API](https://apis.io/apis/indian-institute-of-technology-kharagpur/indian-institute-of-technology-kharagpur-continuing-education-api/) — Continuing Education Programme course documents. One operation, verified live 2026-09-01.
+- [Indian Institute of Technology Kharagpur Open Search API](https://apis.io/apis/indian-institute-of-technology-kharagpur/indian-institute-of-technology-kharagpur-open-search-api/) — OpenSearch 1.1 description and query operations. All parameters verified live 2026-09-01.
 
-## APIs
+### Published properties
 
-- **Institutional Digital Repository (DSpace)** — DSpace-based open repository of IIT Kharagpur scholarly output; public XMLUI interface. Docs: http://www.idr.iitkgp.ac.in/xmlui/
-- **IRINS Research Information Portal** — INFLIBNET-hosted research-profile portal ingesting ORCID/Scopus/Crossref data. Docs: https://iitkgp.irins.org/
-- **ERP / Single Sign-On (Gated)** — Official ERP/SSO server for enrolled members; gated, no public API docs. Docs: https://erp.iitkgp.ac.in/
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Plans
+#### JSON Schema (2)
 
-See [plans/indian-institute-of-technology-kharagpur-plans-pricing.yml](plans/indian-institute-of-technology-kharagpur-plans-pricing.yml).
+The data models the API reads and writes.
 
-## Rate Limits
+- [IIT Kharagpur ERP CEP Brochure Request](https://apis.io/schemas/indian-institute-of-technology-kharagpur/indian-institute-of-technology-kharagpur-erp-cep-request/)
+- [IIT Kharagpur IDR OpenSearch Result Feed](https://apis.io/schemas/indian-institute-of-technology-kharagpur/indian-institute-of-technology-kharagpur-idr-opensearch-feed/)
 
-See [rate-limits/indian-institute-of-technology-kharagpur-rate-limits.yml](rate-limits/indian-institute-of-technology-kharagpur-rate-limits.yml).
+#### JSON-LD (1)
 
-## FinOps
+Linked-data contexts for the provider's vocabulary.
 
-See [finops/indian-institute-of-technology-kharagpur-finops.yml](finops/indian-institute-of-technology-kharagpur-finops.yml).
+- [Indian Institute Of Technology Kharagpur Context](https://apis.io/jsonld/indian-institute-of-technology-kharagpur/indian-institute-of-technology-kharagpur-context/)
 
-## Timestamps
+#### Governance rules (1)
 
-- Created: 2026-06-03
-- Modified: 2026-06-03
+Spectral rulesets for the provider's contracts.
 
-## Common Properties
+- [Indian Institute of Technology Kharagpur API Rules](https://apis.io/rules/indian-institute-of-technology-kharagpur/indian-institute-of-technology-kharagpur-rules/)
 
-- Website: https://www.iitkgp.ac.in/
-- GitHub: https://github.com/IIT-KGP
-- LinkedIn: https://www.linkedin.com/school/indian-institute-of-technology-kharagpur/
-- Library: https://library.iitkgp.ac.in/
-- Review: [review.yml](review.yml)
+#### Security (2)
 
-## Notes
+Authentication, trust centre, and vulnerability disclosure.
 
-- No official institution-wide developer portal or documented public API was found. Catalog entries are limited to publicly reachable, standards-based endpoints.
-- The DSpace IR XMLUI front end is live; the conventional OAI-PMH verb path probed returned 404, so the exact OAI endpoint location is unconfirmed.
-- The ERP/SSO system is gated (OTP + secret question); its SSO endpoint expects POST and returns 405 on GET.
-- Community organizations (metakgp, devsoc-iitkgp) maintain unofficial tooling around IIT KGP services and are intentionally excluded from this official-institution catalog.
-- HTTP statuses recorded as of 2026-06-03; the main website returns 200 only with a browser User-Agent.
+- [Indian Institute Of Technology Kharagpur Authentication](https://apis.io/security/indian-institute-of-technology-kharagpur/indian-institute-of-technology-kharagpur-authentication/)
+- [Indian Institute Of Technology Kharagpur Domain Security](https://apis.io/security/indian-institute-of-technology-kharagpur/indian-institute-of-technology-kharagpur-domain-security/)
 
-## Maintainers
+#### Plans and pricing (1)
 
-- Kin Lane — kin@apievangelist.com
+Published plans, tiers and prices.
+
+- [Indian Institute Of Technology Kharagpur Plans Pricing](https://apis.io/plans/indian-institute-of-technology-kharagpur/indian-institute-of-technology-kharagpur-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Indian Institute Of Technology Kharagpur Rate Limits](https://apis.io/rate-limits/indian-institute-of-technology-kharagpur/indian-institute-of-technology-kharagpur-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Indian Institute Of Technology Kharagpur Finops](https://apis.io/finops/indian-institute-of-technology-kharagpur/indian-institute-of-technology-kharagpur-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.iitkgp.ac.in/)
+- [API reference](http://www.idr.iitkgp.ac.in/xmlui/open-search/description.xml)
+- [Privacy policy](https://hpc.iitkgp.ac.in/privacy-policy)
+
+## API Evangelist rating
+
+**Kin Score 31.9** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 58.3 |
+| Contract governance | 3.8 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 15.8 |
+
+**Agent readiness 24.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.6** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/indian-institute-of-technology-kharagpur/](https://apis.io/providers/indian-institute-of-technology-kharagpur/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Indian Institute of Technology Kharagpur: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/indian-institute-of-technology-kharagpur/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
